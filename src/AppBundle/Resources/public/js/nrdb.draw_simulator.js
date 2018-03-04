@@ -29,7 +29,7 @@
 	}
 
 	function check_draw_type() {
-		identity = NRDB.data.cards.find({indeck:{'$gt':0},type_code:{'$eq':'identity'}}).pop();
+		identity = NRDB.data.cards.find({indeck:{'$gt':0},type_code:{'$eq':'hero'}}).pop();
 		var special_button = $("#draw-simulator-special");
 		var special_draw = false;
 		switch (identity.code) {

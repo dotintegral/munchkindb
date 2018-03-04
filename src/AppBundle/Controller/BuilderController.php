@@ -28,7 +28,7 @@ class BuilderController extends Controller
                 "name" => $side_text
         ));
         $type = $em->getRepository('AppBundle:Type')->findOneBy(array(
-                "code" => "identity"
+                "code" => "hero"
         ));
         
         $identities = $em->getRepository('AppBundle:Card')->findBy(array(

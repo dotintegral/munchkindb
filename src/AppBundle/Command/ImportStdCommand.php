@@ -186,6 +186,82 @@ class ImportStdCommand extends ContainerAwareCommand
         $output->writeln("Done.");
     }
 
+
+    protected function importNoTypeData(Card $card, $data)
+    {
+    }
+
+    protected function importHeroData(Card $card, $data)
+    {
+	$mandatoryKeys = [
+		'life'
+	];
+        foreach ($mandatoryKeys as $key) {
+            $this->copyKeyToEntity($card, 'AppBundle\Entity\Card', $data, $key, true);
+        }
+    }
+    
+    protected function importLocationData(Card $card, $data)
+    {
+    }
+    
+    protected function importLootData(Card $card, $data)
+    {
+	$mandatoryKeys = [
+		'rank'
+	];
+        foreach ($mandatoryKeys as $key) {
+            $this->copyKeyToEntity($card, 'AppBundle\Entity\Card', $data, $key, true);
+        }
+    }
+
+
+    protected function importWeaponData(Card $card, $data)
+    {
+	$mandatoryKeys = [
+		'rank',
+		'power',
+		'defense'
+	];
+        foreach ($mandatoryKeys as $key) {
+            $this->copyKeyToEntity($card, 'AppBundle\Entity\Card', $data, $key, true);
+        }
+    }
+    
+
+    protected function importMischiefData(Card $card, $data)
+    {
+	$mandatoryKeys = [
+		'gold'
+	];
+        foreach ($mandatoryKeys as $key) {
+            $this->copyKeyToEntity($card, 'AppBundle\Entity\Card', $data, $key, true);
+        }
+    }
+
+    protected function importMonsterData(Card $card, $data)
+    {
+	$mandatoryKeys = [
+		'gold',
+		'power',
+		'life'
+	];
+        foreach ($mandatoryKeys as $key) {
+            $this->copyKeyToEntity($card, 'AppBundle\Entity\Card', $data, $key, true);
+        }
+    }
+    
+    protected function importAllyData(Card $card, $data)
+    {
+	$mandatoryKeys = [
+		'gold',
+		'life'
+	];
+        foreach ($mandatoryKeys as $key) {
+            $this->copyKeyToEntity($card, 'AppBundle\Entity\Card', $data, $key, true);
+        }
+    }
+
     protected function importSidesJsonFile(SplFileInfo $fileinfo)
     {
         $result = [];
@@ -215,10 +291,11 @@ class ImportStdCommand extends ContainerAwareCommand
                 'code',
                 'name',
                 'color',
-                'is_mini',
             ], [
                 'side_code',
-            ], []);
+	], [
+		'is_mini'	
+	]);
             if ($faction) {
                 $result[] = $faction;
                 $this->em->persist($faction);
@@ -285,7 +362,6 @@ class ImportStdCommand extends ContainerAwareCommand
                 'position',
                 'size',
                 'date_release',
-                'ffg_id',
             ], [
                 'cycle_code',
             ], []);
@@ -312,11 +388,10 @@ class ImportStdCommand extends ContainerAwareCommand
         foreach ($cardsData as $cardData) {
             $card = $this->getEntityFromData('AppBundle\Entity\Card', $cardData, [
                 'code',
-                'deck_limit',
                 'position',
-                'quantity',
                 'title',
-                'uniqueness',
+		'image_url',
+		'rarity'
             ], [
                 'faction_code',
                 'pack_code',
@@ -324,12 +399,16 @@ class ImportStdCommand extends ContainerAwareCommand
                 'type_code',
             ], [
                 'illustrator',
-                'flavor',
+                'uniqueness',
+                'quantity',
+		'colorist',
                 'keywords',
                 'text',
-                'cost',
-                'faction_cost',
-                'trash_cost',
+                'gold',
+                'rank',
+                'power',
+                'defense',
+		'deck_limit'
             ]);
             if ($card) {
                 $result[] = $card;
@@ -544,8 +623,10 @@ class ImportStdCommand extends ContainerAwareCommand
         // special case for Card
         if ($entityName === 'AppBundle\Entity\Card') {
             // calling a function whose name depends on the type_code
+	  if($entity->getType()) {
             $functionName = 'import'.$entity->getType()->getName().'Data';
             $this->$functionName($entity, $data);
+	  }
         }
 
         $newer = $entity->serialize();

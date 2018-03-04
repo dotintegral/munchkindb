@@ -730,7 +730,6 @@ cards_zoom:
         _locale: en
     requirements:
         _locale: \w\w
-        card_code: \d+
 
 cards_cycle:
     path:  /{_locale}/cycle/{cycle_code}/{view}/{sort}/{page}

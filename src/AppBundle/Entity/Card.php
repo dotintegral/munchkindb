@@ -24,22 +24,21 @@ class Card implements \Gedmo\Translatable\Translatable, \Serializable
 				'code',
 				'title',
 				'position',
+		];
+
+		$optionalFields = [
 				'uniqueness',
 				'deck_limit',
 				'quantity',
-		];
-		if(substr($this->faction->getCode(), 0, 7) === 'neutral' && $this->type->getCode() !== 'identity') {
-			$mandatoryFields[] = 'faction_cost';
-		}
-
-		$optionalFields = [
 				'illustrator',
-				'flavor',
+				'colorist',
 				'keywords',
 				'text',
-				'cost',
-				'faction_cost',
-				'trash_cost',
+				'gold',
+				'rank',
+				'power',
+				'defense',
+				'life',
 				'image_url'
 		];
 
@@ -103,7 +102,9 @@ class Card implements \Gedmo\Translatable\Translatable, \Serializable
 
 		foreach($externalFields as $externalField) {
 			$getter = 'get' . $this->snakeToCamel($externalField);
-			$serialized[$externalField.'_code'] = $this->$getter()->getCode();
+			//if(isset($this->$getter)) {
+				$serialized[$externalField.'_code'] = $this->$getter()->getCode();
+			//}
 		}
 		
 		ksort($serialized);
@@ -1099,5 +1100,208 @@ class Card implements \Gedmo\Translatable\Translatable, \Serializable
         $this->imageUrl = $imageUrl;
 
         return $this;
+    }
+    /**
+     * @var integer
+     */
+    private $gold;
+
+    /**
+     * @var integer
+     */
+    private $rank;
+
+    /**
+     * @var integer
+     */
+    private $life;
+
+    /**
+     * @var integer
+     */
+    private $power;
+
+    /**
+     * @var integer
+     */
+    private $defense;
+
+    /**
+     * @var string
+     */
+    private $colorist;
+
+    /**
+     * @var string
+     */
+    private $rarity;
+
+
+    /**
+     * Set gold
+     *
+     * @param integer $gold
+     *
+     * @return Card
+     */
+    public function setGold($gold)
+    {
+        $this->gold = $gold;
+
+        return $this;
+    }
+
+    /**
+     * Get gold
+     *
+     * @return integer
+     */
+    public function getGold()
+    {
+        return $this->gold;
+    }
+
+    /**
+     * Set rank
+     *
+     * @param integer $rank
+     *
+     * @return Card
+     */
+    public function setRank($rank)
+    {
+        $this->rank = $rank;
+
+        return $this;
+    }
+
+    /**
+     * Get rank
+     *
+     * @return integer
+     */
+    public function getRank()
+    {
+        return $this->rank;
+    }
+
+    /**
+     * Set life
+     *
+     * @param integer $life
+     *
+     * @return Card
+     */
+    public function setLife($life)
+    {
+        $this->life = $life;
+
+        return $this;
+    }
+
+    /**
+     * Get life
+     *
+     * @return integer
+     */
+    public function getLife()
+    {
+        return $this->life;
+    }
+
+    /**
+     * Set power
+     *
+     * @param integer $power
+     *
+     * @return Card
+     */
+    public function setPower($power)
+    {
+        $this->power = $power;
+
+        return $this;
+    }
+
+    /**
+     * Get power
+     *
+     * @return integer
+     */
+    public function getPower()
+    {
+        return $this->power;
+    }
+
+    /**
+     * Set defense
+     *
+     * @param integer $defense
+     *
+     * @return Card
+     */
+    public function setDefense($defense)
+    {
+        $this->defense = $defense;
+
+        return $this;
+    }
+
+    /**
+     * Get defense
+     *
+     * @return integer
+     */
+    public function getDefense()
+    {
+        return $this->defense;
+    }
+
+    /**
+     * Set colorist
+     *
+     * @param string $colorist
+     *
+     * @return Card
+     */
+    public function setColorist($colorist)
+    {
+        $this->colorist = $colorist;
+
+        return $this;
+    }
+
+    /**
+     * Get colorist
+     *
+     * @return string
+     */
+    public function getColorist()
+    {
+        return $this->colorist;
+    }
+
+    /**
+     * Set rarity
+     *
+     * @param string $rarity
+     *
+     * @return Card
+     */
+    public function setRarity($rarity)
+    {
+        $this->rarity = $rarity;
+
+        return $this;
+    }
+
+    /**
+     * Get rarity
+     *
+     * @return string
+     */
+    public function getRarity()
+    {
+        return $this->rarity;
     }
 }

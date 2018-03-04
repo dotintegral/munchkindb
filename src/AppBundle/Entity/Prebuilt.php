@@ -368,4 +368,3 @@ class Prebuilt implements \Gedmo\Translatable\Translatable, \Serializable
     	$this->locale = $locale;
     }
 }
-

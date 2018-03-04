@@ -13,9 +13,9 @@ function update_max_qty() {
         if(card.pack_code == 'core' || card.pack_code == 'core2') {
             max_qty = Math.min(card.quantity * NRDB.settings.getItem('core-sets'), max_qty);
         }
-        if(Identity.pack_code == "draft") {
-            max_qty = 9;
-        }
+        //if(Identity.pack_code == "draft") {
+        //    max_qty = 9;
+        //}
         NRDB.data.cards.updateById(card.code, {
             maxqty : max_qty
         });
@@ -523,7 +523,7 @@ function handle_quantity_change(event) {
 		indeck : quantity
 	});
 	var card = NRDB.data.cards.findById(index);
-	if (card.type_code == "identity") {
+	if (card.type_code == "hero") {
 		if (Identity.faction_code != card.faction_code) {
 			// change of faction, reset agendas
 			NRDB.data.cards.update({
@@ -545,7 +545,7 @@ function handle_quantity_change(event) {
 			indeck : {
 				'$gt' : 0
 			},
-			type_code : 'identity',
+			type_code : 'hero',
 			code : {
 				'$ne' : index
 			}
@@ -554,7 +554,7 @@ function handle_quantity_change(event) {
 		});
 	}
 	update_deck();
-	if (card.type_code == "identity") {
+	if (card.type_code == "hero") {
 		NRDB.draw_simulator.reset();
 		$.each(CardDivs, function(nbcols, rows) {
 			if (rows)
@@ -627,6 +627,7 @@ function build_div(record) {
 
 	var radios = '';
 	for (var i = 0; i <= record.maxqty; i++) {
+	//for (var i = 0; i <= 3; i++) {
 		if(i && !(i%4)) {
 			radios += '<br>';
 		}

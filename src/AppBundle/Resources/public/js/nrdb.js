@@ -135,12 +135,12 @@ function getDisplayDescriptions(sort) {
 function process_deck_by_type() {
 
     var bytype = {};
-    Identity = NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: 'identity' }).pop();
+    Identity = NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: 'hero' }).pop();
     if (!Identity) {
         return;
     }
 
-    NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: { '$ne': 'identity' } }, {
+    NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: { '$ne': 'hero' } }, {
         type: 1,
         title: 1,
     }).forEach(function (card) {
@@ -249,7 +249,7 @@ function get_influence_penalty_icons(card, qty) {
 }
 
 function find_identity() {
-    Identity = NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: 'identity' }).pop();
+    Identity = NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: 'hero' }).pop();
 }
 
 function update_deck(options) {
@@ -353,7 +353,7 @@ function update_deck(options) {
 
     NRDB.data.cards.find({
         indeck: { '$gt': 0 },
-        type_code: { '$ne': 'identity' },
+        type_code: { '$ne': 'hero' },
     }, { '$orderBy': orderBy }).forEach(function (card) {
         if (latestpack.cycle.position < card.pack.cycle.position
             || (latestpack.cycle.position == card.pack.cycle.position && latestpack.position < card.pack.position)) {
@@ -524,12 +524,12 @@ function test_cacherefresh() {
 }
 
 function test_onesies() {
-    var all_cards = _.map(NRDB.data.cards.find({ type_code: { '$ne': 'identity' }, indeck: { '$gt': 0 } }), 'code'),
+    var all_cards = _.map(NRDB.data.cards.find({ type_code: { '$ne': 'hero' }, indeck: { '$gt': 0 } }), 'code'),
         accepted_cards = [];
 
     // core set check
     NRDB.data.cards.find({
-        type_code: { '$ne': 'identity' },
+        type_code: { '$ne': 'hero' },
         indeck: { '$gt': 0 },
         pack_code: 'core',
     }).forEach(function (card) {
@@ -540,7 +540,7 @@ function test_onesies() {
 
     // deluxe and datapack check
     var remaining_cards = NRDB.data.cards.find({
-        type_code: { '$ne': 'identity' },
+        type_code: { '$ne': 'hero' },
         indeck: { '$gt': 0 },
         pack_code: { '$ne': 'core' },
         code: { '$nin': accepted_cards },
@@ -575,7 +575,7 @@ function test_onesies() {
 
 function check_decksize() {
     DeckSize = _.reduce(
-        NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: { '$ne': 'identity' } }),
+        NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: { '$ne': 'hero' } }),
         function (acc, card) {
             return acc + card.indeck;
         },
@@ -948,7 +948,7 @@ function export_jintekinet() {
 function make_cost_graph() {
     var costs = [];
 
-    NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: { '$ne': 'identity' } }).forEach(function (card) {
+    NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: { '$ne': 'hero' } }).forEach(function (card) {
         if (card.cost != null) {
             if (costs[card.cost] == null)
                 costs[card.cost] = [];
@@ -1020,7 +1020,7 @@ function make_strength_graph() {
     var strengths = [];
     var ice_types = ['Barrier', 'Code Gate', 'Sentry', 'Other'];
 
-    NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: { '$ne': 'identity' } }).forEach(function (card) {
+    NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: { '$ne': 'hero' } }).forEach(function (card) {
         if (card.strength != null) {
             if (strengths[card.strength] == null)
                 strengths[card.strength] = [];
