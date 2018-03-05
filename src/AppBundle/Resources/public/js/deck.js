@@ -73,12 +73,8 @@ Promise.all([NRDB.data.promise, NRDB.settings.promise]).then(function() {
 
 	$('#type_code').empty();
 	var types = NRDB.data.types.find({
-		is_subtype:false,
-		'$or': [{
-			side_code: Identity.side_code
-		},{
-			side_code: null
-		}]
+		is_subtype: false,
+		code: { '$ne': 'hero' }
 	}).sort();
 	types.forEach(function(type) {
 		var label = $('<label class="btn btn-default btn-sm" data-code="'
