@@ -245,7 +245,7 @@ class Decks
                     if ($latestPack->getCycle()->getPosition() == $pack->getCycle()->getPosition() && $latestPack->getPosition() < $pack->getPosition()) {
                         $latestPack = $pack;
                     }
-            if ($card->getType()->getCode() == "identity") {
+            if ($card->getType()->getCode() == "hero") {
                 $identity = $card;
             }
             $cards[$card_code] = $card;

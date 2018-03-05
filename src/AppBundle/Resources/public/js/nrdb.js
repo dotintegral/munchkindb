@@ -18,107 +18,61 @@ function getDisplayDescriptions(sort) {
         'type': [
             [// first column
 
-                {
-                    id: 'event',
-                    label: 'Event',
-                    image: '/bundles/app/images/types/event.png',
-                }, {
-                id: 'hardware',
-                label: 'Hardware',
-                image: '/bundles/app/images/types/hardware.png',
+            {
+                id: 'monster',
+                label: 'Monster',
+                image: null
             }, {
-                id: 'resource',
-                label: 'Resource',
-                image: '/bundles/app/images/types/resource.png',
+                id: 'mischief',
+                label: 'Mischief',
+                image: null
             }, {
-                id: 'agenda',
-                label: 'Agenda',
-                image: '/bundles/app/images/types/agenda.png',
+                id: 'loot',
+                label: 'Loot',
+                image: null
             }, {
-                id: 'asset',
-                label: 'Asset',
-                image: '/bundles/app/images/types/asset.png',
+                id: 'ally',
+                label: 'Ally',
+                image: null
             }, {
-                id: 'upgrade',
-                label: 'Upgrade',
-                image: '/bundles/app/images/types/upgrade.png',
+                id: 'location',
+                label: 'Location',
+                image: null
             }, {
-                id: 'operation',
-                label: 'Operation',
-                image: '/bundles/app/images/types/operation.png',
-            },
-            ],
-            [// second column
-                {
-                    id: 'icebreaker',
-                    label: 'Icebreaker',
-                    image: '/bundles/app/images/types/program.png',
-                }, {
-                id: 'program',
-                label: 'Program',
-                image: '/bundles/app/images/types/program.png',
-            }, {
-                id: 'barrier',
-                label: 'Barrier',
-                image: '/bundles/app/images/types/ice.png',
-            }, {
-                id: 'code-gate',
-                label: 'Code Gate',
-                image: '/bundles/app/images/types/ice.png',
-            }, {
-                id: 'sentry',
-                label: 'Sentry',
-                image: '/bundles/app/images/types/ice.png',
-            }, {
-                id: 'multi',
-                label: 'Multi',
-                image: '/bundles/app/images/types/ice.png',
-            }, {
-                id: 'none',
-                label: 'Other',
-                image: '/bundles/app/images/types/ice.png',
-            },
-            ],
+                id: 'notype',
+                label: 'Misc',
+                image: null
+            }
+            ]
         ],
         'faction': [
             [],
             [{
-                id: 'anarch',
-                label: 'Anarch',
+                id: 'bard',
+                label: 'Bard',
             }, {
-                id: 'criminal',
-                label: 'Criminal',
+                id: 'cleric',
+                label: 'Cleric'
             }, {
-                id: 'haas-bioroid',
-                label: 'Haas-Bioroid',
+                id: 'ranger',
+                label: 'Ranger'
             }, {
-                id: 'jinteki',
-                label: 'Jinteki',
+                id: 'warrior',
+                label: 'Warrior'
             }, {
-                id: 'nbn',
-                label: 'NBN',
+                id: 'wizard',
+                label: 'Wizard'
             }, {
-                id: 'shaper',
-                label: 'Shaper',
+                id: 'thief',
+                label: 'Thief'
             }, {
-                id: 'weyland-consortium',
-                label: 'Weyland Consortium',
+                id: 'neutral',
+                label: 'Neutral'
             }, {
-                id: 'neutral-corp',
-                label: 'Neutral',
-            }, {
-                id: 'neutral-runner',
-                label: 'Neutral',
-            }, {
-                id: 'adam',
-                label: 'Adam',
-            }, {
-                id: 'apex',
-                label: 'Apex',
-            }, {
-                id: 'sunny-lebeau',
-                label: 'Sunny Lebeau',
-            }],
+                id: 'nofaction',
+                label: 'No Faction'
+            }
+            ],
         ],
         'number': [],
         'title': [
@@ -312,7 +266,7 @@ function update_deck(options) {
     InfluenceLimit = 0;
     var cabinet = {};
     var parts = Identity.title.split(/: /);
-    $('#identity').html('<a href="' + Routing.generate('cards_zoom', { card_code: Identity.code }) + '" data-target="#cardModal" data-remote="false" class="card" data-toggle="modal" data-index="' + Identity.code + '">' + parts[0] + ' <small>' + parts[1] + '</small></a>');
+    $('#identity').html('<a href="' + Routing.generate('cards_zoom', { card_code: Identity.code }) + '" data-target="#cardModal" data-remote="false" class="card" data-toggle="modal" data-index="' + Identity.code + '">' + parts[0]);
     $('#img_identity').prop('src', Identity.imageUrl);
     InfluenceLimit = Identity.influence_limit;
     if (typeof InfluenceLimit === "undefined")
