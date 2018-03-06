@@ -78,7 +78,8 @@
 	};
 
 	suggestions.show = function() {
-                suggestions.refresh();
+                return;
+		suggestions.refresh();
                 
                 var table = $('#table-suggestions');
 		var tbody = table.children('tbody');

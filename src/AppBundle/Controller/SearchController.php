@@ -90,7 +90,7 @@ class SearchController extends Controller
 	{
 		$card = $this->getDoctrine()->getRepository('AppBundle:Card')->findOneBy(["code" => $card_code]);
 		if(!$card) throw $this->createNotFoundException('Sorry, this card is not in the database (yet?)');
-		$meta = $card->getTitle().", a ".$card->getFaction()->getName()." ".$card->getType()->getName()." card for Android:Netrunner from the set ".$card->getPack()->getName()." published by Fantasy Flight Games.";
+		$meta = $card->getTitle().", a ".$card->getFaction()->getName()." ".$card->getType()->getName()." card for the Munchkin Collectible Card Game from the set ".$card->getPack()->getName()." published by Steve Jackson Games.";
 		return $this->forward(
 			'AppBundle:Search:display',
 			array(
@@ -110,9 +110,9 @@ class SearchController extends Controller
 	{
 		$pack = $this->getDoctrine()->getRepository('AppBundle:Pack')->findOneBy(["code" => $pack_code]);
 		if(!$pack) throw $this->createNotFoundException('This pack does not exist');
-		$meta = $pack->getName().", a set of cards for Android:Netrunner"
+		$meta = $pack->getName().", a set of cards for the Munchkin Collectible Card Game." 
 				.($pack->getDateRelease() ? " published on ".$pack->getDateRelease()->format('Y/m/d') : "")
-				." by Fantasy Flight Games.";
+				." by Steve Jackson Games.";
 		return $this->forward(
 			'AppBundle:Search:display',
 			array(
@@ -133,7 +133,7 @@ class SearchController extends Controller
 	{
 		$cycle = $this->getDoctrine()->getRepository('AppBundle:Cycle')->findOneBy(["code" => $cycle_code]);
 		if(!$cycle) throw $this->createNotFoundException('This cycle does not exist');
-		$meta = $cycle->getName().", a cycle of datapack for Android:Netrunner published by Fantasy Flight Games.";
+		$meta = $cycle->getName().", a cycle of datapack for the Munchkin Collectible Card Game published by Steve Jackson Games.";
 		return $this->forward(
 			'AppBundle:Search:display',
 			array(

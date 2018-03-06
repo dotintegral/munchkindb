@@ -74,17 +74,6 @@ var Filters = {},
 </div><!-- /#deck-content -->
 <!-- Deck Content -->
 
-<!-- Suggestions -->
-<table class="table table-condensed" id="table-suggestions">
-<thead>
-<tr><th colspan="6"><span class="glyphicon glyphicon-fast-forward"></span> Card suggestions</th></tr>
-</thead>
-<tbody>
-<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-</tbody>
-</table>
-<!-- Suggestions -->
-
 <form method="POST" action="{{ path('deck_save') }}" id="save_form" role="form" style="margin-bottom:1em">
 	<input type="hidden" id="deck-save-id" name="id" value="{{ deck.id }}">
 	<input type="hidden" id="deck-save-as-copy" name="copy" value="0">

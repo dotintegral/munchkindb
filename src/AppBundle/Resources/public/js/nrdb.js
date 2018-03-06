@@ -535,7 +535,7 @@ function check_decksize() {
         },
         0);
     MinimumDeckSize = Identity.minimum_deck_size;
-    $('#cardcount').html(DeckSize + " cards (min " + MinimumDeckSize + ")")[DeckSize < MinimumDeckSize ? 'addClass' : 'removeClass']("text-danger");
+    $('#cardcount').html(DeckSize + " cards")[DeckSize != 40 ? 'addClass' : 'removeClass']("text-danger");
     if (Identity.side_code == 'corp') {
         AgendaPoints = _.reduce(
             NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: 'agenda' }),
@@ -628,7 +628,6 @@ function check_influence(influenceSpent) {
         displayInfluenceLimit = "&#8734;";
     }
     var isOver = remainingInfluence < InfluenceSpent;
-    $('#influence').html(InfluenceSpent + " influence spent (max " + displayInfluenceLimit + ", available " + availableInfluence + ")")[isOver ? 'addClass' : 'removeClass']("text-danger");
 }
 
 function check_restricted() {

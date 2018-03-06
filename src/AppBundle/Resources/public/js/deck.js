@@ -57,17 +57,20 @@ Promise.all([NRDB.data.promise, NRDB.settings.promise]).then(function() {
 				: a.code.localeCompare(b.code);
 	});
 	factions.forEach(function(faction) {
-		var label = $('<label class="btn btn-default btn-sm" data-code="' + faction.code
+		var label = $('<label class="btn btn-default btn-md btn-block" data-code="' + faction.code
 				+ '" title="'+faction.name+'"><input type="checkbox" name="' + faction.code
 				+ '"><img src="'
 				+ Url_FactionImage.replace('xxx', faction.code)
-				+ '" style="height:12px" alt="'+faction.code+'"></label>');
+				+ '" style="height:12px" alt="'+faction.code.slice(0,3)+'"></label>');
 		label.tooltip({container: 'body'});
 		$('#faction_code').append(label);
 	});
 	
 	$('#faction_code').button();
 	$('#faction_code').children('label[data-code='+Identity.faction_code+']').each(function(index, elt) {
+		$(elt).button('toggle');
+	});
+	$('#faction_code').children('label[data-code=neutral]').each(function(index, elt) {
 		$(elt).button('toggle');
 	});
 
@@ -80,12 +83,12 @@ Promise.all([NRDB.data.promise, NRDB.settings.promise]).then(function() {
 		var label = $('<label class="btn btn-default btn-sm" data-code="'
 				+ type.code + '" title="'+type.name+'"><input type="checkbox" name="' + type.code
 				+ '"><img src="' + Url_TypeImage.replace('xxx', type.code)
-				+ '" style="height:12px" alt="'+type.code+'"></label>');
+				+ '" style="height:12px" alt="'+type.code.slice(0,2)+'"></label>');
 		label.tooltip({container: 'body'});
 		$('#type_code').append(label);
 	});
 	$('#type_code').button();
-	$('#type_code').children('label:first-child').each(function(index, elt) {
+	$('#type_code').children().each(function(index, elt) {
 		$(elt).button('toggle');
 	});
 	
