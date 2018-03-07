@@ -44,7 +44,6 @@ var Identity = null,
 		<ul class="dropdown-menu" role="menu">
 			<li><a href="{{ path('deck_import') }}" id="btn-import-paste">Copy/paste</a></li>
 			<li><a href="#" onclick="$('#fileModal').modal('show')" id="btn-import-file">File</a></li>
-			<li><a href="#" onclick="$('#meteorModal').modal('show')" id="btn-import-meteor">Meteor Decks</a></li>
 		</ul>
 	</div>
 </div>
@@ -86,7 +85,6 @@ var Identity = null,
  
 <div class="row" style="margin-bottom:10px">
 <div class="col-md-12">
-    <a role="button" class="btn btn-default btn-sm" href="{{ path('decks_download_all') }}">Download all decks</a>
     <button role="button" class="btn btn-default btn-sm" id="decks_upload_all">Upload all decks</button>
 </div>
 </div>
@@ -157,8 +155,6 @@ var Identity = null,
 		<button type="button" id="btn-delete" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span> Delete</button>
 	</div>
 	<div style="margin-bottom:10px">
-		<button type="button" class="btn btn-default btn-xs" id="btn-download-text">Text file</button>
-		<button type="button" class="btn btn-default btn-xs" id="btn-download-octgn">Octgn file</button>
 		<button type="button" class="btn btn-default btn-xs" id="btn-export-bbcode">bbCode</button>
 		<button type="button" class="btn btn-default btn-xs" id="btn-export-markdown">Markdown (Reddit)</button>
 		<button type="button" class="btn btn-default btn-xs" id="btn-export-plaintext">plain text</button>
