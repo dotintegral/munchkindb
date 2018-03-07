@@ -167,12 +167,13 @@ class CardsData {
                 case '': // title or index
                     $or = array();
                     foreach ($condition as $arg) {
-                        $code = preg_match('/^[0-9a-zA-Z]*$/u', $arg);
+                        $code = preg_match('/^(OA)?[0-9]*$/u', $arg);
                         $acronym = preg_match('/^[A-Z]{2,}$/', $arg);
                         if ($code) {
                             $or[] = "(c.code = ?$i)";
                             $parameters[$i++] = $arg;
                         } else if ($acronym) {
+                                die('foobar');
                             $or[] = "(BINARY(c.title) like ?$i)";
                             $parameters[$i++] = "%$arg%";
                             $like = implode('% ', str_split($arg));
@@ -578,11 +579,18 @@ class CardsData {
             "agendapoints" => $card->getAgendaPoints(),
             "baselink" => $card->getBaseLink(),
             "cost" => $card->getCost(),
+	    "gold" => $card->getGold(),
+	    "rank" => $card->getRank(),
+	    "life" => $card->getLife(),
+	    "defense" => $card->getDefense(),
+	    "power" => $card->getPower(),
+	    "rarity" => $card->getRarity(),
             "faction_name" => $card->getFaction()->getName(),
             "faction_code" => $card->getFaction()->getCode(),
             "factioncost" => $card->getFactionCost(),
             "flavor" => $card->getFlavor(),
             "illustrator" => $card->getIllustrator(),
+	    "colorist" => $card->getColorist(),
             "influencelimit" => $card->getInfluenceLimit(),
             "memoryunits" => $card->getMemoryCost(),
             "minimumdecksize" => $card->getMinimumDeckSize(),

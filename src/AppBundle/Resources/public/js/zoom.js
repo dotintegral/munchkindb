@@ -61,7 +61,7 @@ function add_ruling(event) {
                         + ')';
             },
             index: 1
-        }, {
+        }/*, {
             match: /\$([\-+\w]*)$/,
             search: function (term, callback) {
                 var regexp = new RegExp('^' + term);
@@ -79,7 +79,7 @@ function add_ruling(event) {
                 return '<span class="icon icon-' + value + '"></span>';
             },
             index: 1
-        }]);
+        }*/]);
 
 }
 
@@ -122,7 +122,7 @@ function edit_ruling(event) {
                         + ')';
             },
             index: 1
-        }, {
+        }/*, {
             match: /\$([\-+\w]*)$/,
             search: function (term, callback) {
                 var regexp = new RegExp('^' + term);
@@ -140,7 +140,7 @@ function edit_ruling(event) {
                 return '<span class="icon icon-' + value + '"></span>';
             },
             index: 1
-        }]);
+        }*/]);
     
 }
 
@@ -202,7 +202,7 @@ function write_review_open(event) {
     $(this).remove();
 
     form.append('<div><div class="form-group">'
-            + '<textarea class="form-control review-form-text" rows="20" name="review" placeholder="Write your analysis of the card, in at least 200 characters. You can write a number of card reviews equal to your reputation. This is not a place for questions or comments. Type # to enter a card name. Type $ to enter a symbol."></textarea>'
+            + '<textarea class="form-control review-form-text" rows="20" name="review" placeholder="Write your analysis of the card, in at least 200 characters. You can write a number of card reviews equal to your reputation. This is not a place for questions or comments. Type # to enter a card name."></textarea>'
             + '</div><div class="well text-muted review-form-preview"><small>Preview. Look <a href="http://daringfireball.net/projects/markdown/dingus">here</a> for a Markdown syntax reference.</small></div>'
             + '<button type="submit" class="btn btn-success">Submit review</button></div>');
 
@@ -260,7 +260,7 @@ function write_review_open(event) {
                         + ')';
             },
             index: 1
-        }, {
+        }/*, {
             match: /\$([\-+\w]*)$/,
             search: function (term, callback) {
                 var regexp = new RegExp('^' + term);
@@ -278,7 +278,7 @@ function write_review_open(event) {
                 return '<span class="icon icon-' + value + '"></span>';
             },
             index: 1
-        }]);
+        }*/]);
 
     if(NRDB.user.data.review_id) {
         $('.review-form-text').val(NRDB.user.data.review_text).trigger('keyup');

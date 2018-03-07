@@ -22,7 +22,7 @@ NRDB.user.params.decklist_id = Decklist.id;
 
 <div class="container decklist">
 
-{% if not decklist.is_legal %}
+{% if false and  not decklist.is_legal %}
         <div class="alert alert-warning" role="alert">This decklist is illegal for some reason</div>
 {% endif %}        
 <div class="row">
@@ -68,9 +68,6 @@ NRDB.user.params.decklist_id = Decklist.id;
     	<ul class="dropdown-menu" id="btn-group-decklist">
     		<li><a href="#" id="btn-copy-decklist">Copy into my decks</a></li>
 			<li><a href="#" id="btn-compare">Compare with another decklist</a></li>
-    		<li class="dropdown-header"><span class="glyphicon glyphicon-download"></span> Download</li>
-	    		<li><a href="#" id="btn-download-text">Text file</a></li>
-				<li><a href="#" id="btn-download-octgn">Octgn file</a></li>
     		<li class="dropdown-header"><span class="glyphicon glyphicon-export"></span> Export</li>
 				<li><a href="#" id="btn-export-bbcode">bbCode</a></li>
 				<li><a href="#" id="btn-export-markdown">Markdown (Reddit)</a></li>
@@ -221,18 +218,6 @@ NRDB.user.params.decklist_id = Decklist.id;
 </tbody>
 </table>
 
-<table class="table table-condensed" id="table-ext">
-<thead>
-<tr><th><span class="glyphicon glyphicon-list"></span> Include in your page (<a href="{{ path('demo_ext_decklist',{id:decklist.id}) }}">help</a>)</th></tr>
-</thead>
-<tbody>
-<tr>
-	<td>
-		<input style="width:100%;font-size:small" value="&lt;div data-id=&quot;{{ decklist.id }}&quot; class=&quot;nrdb-ext-decklist&quot;>&lt;script src=&quot;{{ app.request.getSchemeAndHttpHost() ~ '/ext-decklist.js' }}&quot;>&lt;/script>&lt;/div>">
-	</td>
-</tr>
-</tbody>
-</table>
 
 </div><!-- /#tools -->
 </div>

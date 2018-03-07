@@ -358,7 +358,7 @@ $(function() {
 					+ ')';
 		},
 		index : 1
-	}, {
+	}/*, {
 		match : /\$([\-+\w]*)$/,
 		search : function(term, callback) {
 			var regexp = new RegExp('^' + term);
@@ -374,7 +374,7 @@ $(function() {
 			return '<span class="icon icon-' + value + '"></span>';
 		},
 		index : 1
-	}]);
+	}*/]);
 	$('#mwl_code').on('change', update_mwl);
 	$('#tbody-history').on('click', 'a[role=button]', load_snapshot);
 	setInterval(autosave_interval, 1000);
