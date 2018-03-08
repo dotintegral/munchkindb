@@ -931,42 +931,6 @@ function make_cost_graph() {
             cost_series[i].data.push(data && data[type_name] ? data[type_name] : 0);
         }
     }
-
-    $('#costChart').highcharts({
-        colors: Identity.side_code === 'runner' ? ['#FFE66F', '#316861', '#97BF63', '#5863CC'] : ['#FFE66F', '#B22A95', '#FF55DA', '#30CCC8'],
-        title: {
-            text: null,
-        },
-        credits: {
-            enabled: false,
-        },
-        chart: {
-            type: 'column',
-            animation: false,
-        },
-        xAxis: {
-            categories: xAxis,
-        },
-        yAxis: {
-            title: {
-                text: null,
-            },
-            allowDecimals: false,
-            minTickInterval: 1,
-            minorTickInterval: 1,
-            endOnTick: false,
-        },
-        plotOptions: {
-            column: {
-                stacking: 'normal',
-            },
-            series: {
-                animation: false,
-            },
-        },
-        series: cost_series,
-    });
-
 }
 
 function make_strength_graph() {
@@ -1004,42 +968,6 @@ function make_strength_graph() {
             strength_series[i].data.push(data && data[type_name] ? data[type_name] : 0);
         }
     }
-
-    $('#strengthChart').highcharts({
-        colors: ['#487BCC', '#B8EB59', '#FF6251', '#CCCCCC'],
-        title: {
-            text: null,
-        },
-        credits: {
-            enabled: false,
-        },
-        chart: {
-            type: 'column',
-            animation: false,
-        },
-        xAxis: {
-            categories: xAxis,
-        },
-        yAxis: {
-            title: {
-                text: null,
-            },
-            allowDecimals: false,
-            minTickInterval: 1,
-            minorTickInterval: 1,
-            endOnTick: false,
-        },
-        plotOptions: {
-            column: {
-                stacking: 'normal',
-            },
-            series: {
-                animation: false,
-            },
-        },
-        series: strength_series,
-    });
-
 }
 
 //binomial coefficient module, shamelessly ripped from https://github.com/pboyer/binomial.js

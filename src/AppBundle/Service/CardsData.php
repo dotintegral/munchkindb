@@ -14,18 +14,13 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class CardsData {
 
     public static $faction_letters = [
-        'haas-bioroid' => 'h',
-        'weyland-consortium' => 'w',
-        'anarch' => 'a',
-        'shaper' => 's',
-        'criminal' => 'c',
-        'jinteki' => 'j',
-        'nbn' => 'n',
-        'neutral-corp' => '-',
-        'neutral-runner' => '-',
-        'apex' => 'p',
-        'adam' => 'd',
-        'sunny-lebeau' => 'u',
+        'cleric' => 'c',
+        'ranger' => 'r',
+        'wizard' => 'z',
+        'warrior' => 'w',
+        'thief' => 't',
+        'bard' => 'b',
+        'neutral' => 'n',
     ];
 
     /* @var Registry */

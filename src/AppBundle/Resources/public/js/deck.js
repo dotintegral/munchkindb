@@ -58,10 +58,9 @@ Promise.all([NRDB.data.promise, NRDB.settings.promise]).then(function() {
 	});
 	factions.forEach(function(faction) {
 		var label = $('<label class="btn btn-default btn-md btn-block" data-code="' + faction.code
-				+ '" title="'+faction.name+'"><input type="checkbox" name="' + faction.code
-				+ '"><img src="'
-				+ Url_FactionImage.replace('xxx', faction.code)
-				+ '" style="height:12px" alt="'+faction.code.slice(0,3)+'"></label>');
+				+ '" title="'+faction.name+'"><input type="checkbox" name="' + faction.code + '">'
+				+ '<span>' + faction.code.slice(0,3) + '</span>'
+				+ '</label>');
 		label.tooltip({container: 'body'});
 		$('#faction_code').append(label);
 	});
@@ -81,9 +80,8 @@ Promise.all([NRDB.data.promise, NRDB.settings.promise]).then(function() {
 	}).sort();
 	types.forEach(function(type) {
 		var label = $('<label class="btn btn-default btn-sm" data-code="'
-				+ type.code + '" title="'+type.name+'"><input type="checkbox" name="' + type.code
-				+ '"><img src="' + Url_TypeImage.replace('xxx', type.code)
-				+ '" style="height:12px" alt="'+type.code.slice(0,2)+'"></label>');
+				+ type.code + '" title="' + type.name + '"><input type="checkbox" name="' + type.code + '">'
+				+ '<span>'+type.code.slice(0,2)+'</span></label>');
 		label.tooltip({container: 'body'});
 		$('#type_code').append(label);
 	});
@@ -621,12 +619,12 @@ function update_mwl(event) {
 
 function build_div(record) {
 	var influ = "";
+	var subtype = record.keywords ? record.keywords : '';
 	for (var i = 0; i < record.faction_cost; i++)
 		influ += "●";
 
 	var radios = '';
 	for (var i = 0; i <= record.maxqty; i++) {
-	//for (var i = 0; i <= 3; i++) {
 		if(i && !(i%4)) {
 			radios += '<br>';
 		}
@@ -650,12 +648,11 @@ function build_div(record) {
 				+ '</div></td><td><a class="card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})
 				+ '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
-				+ record.title + '</a> '+get_influence_penalty_icons(record)+'</td><td class="influence influence-' + record.faction_code
-				+ '">' + influ + '</td><td class="type" title="' + record.type.name
-				+ '"><img src="/bundles/app/images/types/'
-				+ record.type_code + '.png" alt="'+record.type.name+'">'
-				+ '</td><td class="faction" title="' + record.faction.name + '">'
-				+ imgsrc + '</td></tr>');
+				+ record.title + '</a> '+get_influence_penalty_icons(record)+'</td>'
+				+ '<td class="type" title="' + record.type.name + '"><span>' + record.type.name + '</span></td>'
+				+ '<td class="subtype" title="' + subtype + '"><span>' + subtype + '</span></td>'
+				+ '<td class="faction" title="' + record.type.name + '"><span>' + record.faction.name + '</span></td>'
+				+ '</tr>');
 		break;
 
 	case 2:
@@ -664,7 +661,7 @@ function build_div(record) {
 				+ record.code
 				+ '">'
 				+ '<div class="media"><div class="media-left">'
-				+ '<img class="media-object" src="'+record.imageUrl+'" alt="'+record.title+'">'
+				+ '<span>'+record.title+'</span>'
 				+ '</div><div class="media-body">'
 				+ '    <h4 class="media-heading"><a class="card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})
@@ -681,7 +678,7 @@ function build_div(record) {
 				+ record.code
 				+ '">'
 				+ '<div class="media"><div class="media-left">'
-				+ '<img class="media-object" src="'+record.imageUrl+'" alt="'+record.title+'">'
+				+ '<span>'+record.title+'</span>'
 				+ '</div><div class="media-body">'
 				+ '    <h5 class="media-heading"><a class="card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})

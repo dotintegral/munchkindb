@@ -13,7 +13,7 @@
 		container = $('#table-draw-simulator-content');
 		deck = [];
 		check_draw_type();
-		NRDB.data.cards.find({indeck:{'$gt':0},type_code:{'$ne':'identity'}}).forEach(function (card) {
+		NRDB.data.cards.find({indeck:{'$gt':0},type_code:{'$ne':'hero'}}).forEach(function (card) {
 			for(var ex = 0; ex < card.indeck; ex++) {
 				deck.push(card);
 			}
