@@ -22,8 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.3.0/introjs.css">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
     <link rel="stylesheet" href="{{ asset('/bundles/app/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('/bundles/app/latofonts.css') }}">
-    <link rel="stylesheet" href="{{ asset('/bundles/app/netrunnerfont.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Merriweather:700,700i" rel="stylesheet"> 
 
     <script src="{{ asset('/bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData","version": asset_version('')}) }}"></script>
@@ -43,6 +42,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.4.2/localforage.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.3.0/intro.js"></script>
     <script src="{{ asset('/bundles/app/lib/bootstrap-toggle-checklist.js') }}"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115483946-1"></script>
     <script src="{{ asset('/bundles/app/lib/jquery-persistence.js') }}"></script>
       <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
       <script>
@@ -73,15 +73,15 @@
 		locale: '{{ app.request.locale }}'
 	};
 	moment.locale(window.navigator.language);
-{% if app.environment == 'prod' %}
-//(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-//(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-//m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-//})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-//
-//ga('create', 'UA-44413511-1', 'auto');
-//ga('send', 'pageview');
-  {% endif %}
+
+        {% if app.environment == 'prod' %}
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-115483946-1');
+        {% endif %}
+
     </script>
     <script src="{{ asset('/bundles/app/js/nrdb.js') }}"></script>
     <script src="{{ asset('/bundles/app/js/nrdb.user.js') }}"></script>

@@ -444,7 +444,7 @@ class ImportStdCommand extends ContainerAwareCommand
                     $prebuiltslot->setPrebuilt($prebuilt);
                     $this->em->persist($prebuiltslot);
 
-                    if ($card->getType()->getCode() === 'identity') {
+                    if ($card->getType()->getCode() === 'hero') {
                         $prebuilt->setIdentity($card);
                         $prebuilt->setFaction($card->getFaction());
                         $prebuilt->setSide($card->getFaction()->getSide());
