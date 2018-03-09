@@ -41,7 +41,7 @@
                 + Routing.generate('activity_feed', {_locale: NRDB.locale})
                 + '">Activity ' + unchecked_activity_label + '</a></li><li><a href="'
                 + Routing.generate('fos_user_security_logout')
-                + '">Jack out</a></li></ul>');
+                + '">Sign out</a></li></ul>');
     };
     
     user.always = function () {

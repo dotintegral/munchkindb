@@ -209,7 +209,7 @@ class Judge
         foreach ($slots as $slot) {
             $card = $slot->getCard();
             $qty = $slot->getQuantity();
-            if ($card->getType()->getName() == "Identity") {
+            if ($card->getType()->getName() == "Hero") {
                 if (isset($identity))
                     return 'identities';
                 $identity = $card;

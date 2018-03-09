@@ -36,8 +36,7 @@ var Identity = null,
 
 <div class="row" style="margin-bottom:10px">
 <div class="col-md-12">
-	<a href="{{ path('deck_buildform', {side_text:'corp'}) }}" class="btn btn-default btn-sm"{% if cannotcreate %} disabled="disabled"{% endif %}><span class="glyphicon glyphicon-plus color-corp"></span> New Corp Deck</a>
-	<a href="{{ path('deck_buildform', {side_text:'runner'}) }}" class="btn btn-default btn-sm"{% if cannotcreate %} disabled="disabled"{% endif %}><span class="glyphicon glyphicon-plus color-runner"></span> New Runner Deck</a>
+	<a href="{{ path('deck_buildform', {side_text:'munchkin'}) }}" class="btn btn-default btn-sm"{% if cannotcreate %} disabled="disabled"{% endif %}><span class="glyphicon glyphicon-plus color-corp"></span> New Deck!</a>
 	<div class="btn-group">
 		<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown"{% if cannotcreate %} disabled="disabled"{% endif %}>
 			<span class="glyphicon glyphicon-import"></span> Import Deck <span class="caret"></span>
@@ -45,7 +44,6 @@ var Identity = null,
 		<ul class="dropdown-menu" role="menu">
 			<li><a href="{{ path('deck_import') }}" id="btn-import-paste">Copy/paste</a></li>
 			<li><a href="#" onclick="$('#fileModal').modal('show')" id="btn-import-file">File</a></li>
-			<li><a href="#" onclick="$('#meteorModal').modal('show')" id="btn-import-meteor">Meteor Decks</a></li>
 		</ul>
 	</div>
 </div>
@@ -78,7 +76,6 @@ var Identity = null,
 			<li><a href="#" id="btn-sort-creation">By date of creation</a></li>
 			<li><a href="#" id="btn-sort-faction">By faction</a></li>
 			<li><a href="#" id="btn-sort-identity">By identity</a></li>
-			<li><a href="#" id="btn-sort-lastpack">By last datapack</a></li>
 			<li><a href="#" id="btn-sort-name">By deck name</a></li>
 		</ul>
 	</div>
@@ -87,7 +84,6 @@ var Identity = null,
  
 <div class="row" style="margin-bottom:10px">
 <div class="col-md-12">
-    <a role="button" class="btn btn-default btn-sm" href="{{ path('decks_download_all') }}">Download all decks</a>
     <button role="button" class="btn btn-default btn-sm" id="decks_upload_all">Upload all decks</button>
 </div>
 </div>
@@ -158,9 +154,6 @@ var Identity = null,
 		<button type="button" id="btn-delete" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span> Delete</button>
 	</div>
 	<div style="margin-bottom:10px">
-		<button type="button" class="btn btn-default btn-xs" id="btn-download-text">Text file</button>
-		<button type="button" class="btn btn-default btn-xs" id="btn-download-octgn">Octgn file</button>
-		<button type="button" class="btn btn-default btn-xs" id="btn-export-jintekinet">Jinteki.net format</button>
 		<button type="button" class="btn btn-default btn-xs" id="btn-export-bbcode">bbCode</button>
 		<button type="button" class="btn btn-default btn-xs" id="btn-export-markdown">Markdown (Reddit)</button>
 		<button type="button" class="btn btn-default btn-xs" id="btn-export-plaintext">plain text</button>
@@ -186,8 +179,7 @@ var Identity = null,
   </div>
 </div>
 <div style="text-align:center">
-		<a href="{{ path('deck_buildform', {side_text:'corp'}) }}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-plus color-corp"></span> Build Corp</a>
-		<a href="{{ path('deck_buildform', {side_text:'runner'}) }}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-plus color-runner"></span> Build Runner</a>
+		<a href="{{ path('deck_buildform', {side_text:'munchkin'}) }}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-plus color-corp"></span> Build Deck</a>
 		<a href="{{ path('deck_import') }}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-import"></span> Import</a>
 		<button type="button" class="btn btn-default btn-lg" onclick="$('#fileModal').modal('show')"><span class="glyphicon glyphicon-upload"></span> Upload</button>
 		<button type="button" class="btn btn-default btn-lg" onclick="$('#archiveModal').modal('show')"><span class="glyphicon glyphicon-upload"></span> Upload archive</button>
@@ -327,9 +319,6 @@ var Identity = null,
 								{% endfor %}
 								</select>
 							</div>
-                                                        <div class="form-group">
-                                                                <span class="help-block">By submitting content, you agree to the <a href="{{ path('cards_about') }}#code-of-conduct">Code of Conduct</a> of the website.</span>
-                                                        </div>
 							<div class="pull-right">
 								<button type="submit" id="btn-publish-submit" class="btn btn-success">Checking...</button>
 								<button type="button" class="btn btn-default" onclick="$('#publishModal').modal('hide')">Cancel</button>

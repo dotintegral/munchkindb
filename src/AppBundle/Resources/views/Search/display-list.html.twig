@@ -7,11 +7,11 @@
 <tr>
 <th>Title</th>
 <th>Faction</th>
-<th title="Cost"><span class="icon icon-credit"></span></th>
+<th>Gold/Rank</th>
+<th>Power</th>
+<th>Life/Defense</th>
 <th>Type</th>
-<th title="Strength/Agenda Points/Trash Cost">&hellip;</th>
 <th>Subtype</th>
-<th title="Influence">&bullet;</th>
 <th>Set</th>
 </tr>
 </thead>
@@ -21,19 +21,13 @@
 	<td data-th="Title">
 		<a href="{{ card.url }}" class="card{% if card.available == false %} card-preview{% endif %}" data-index="{{ card.code }}">{{ card.title }}</a>
 	</td>
-	<td data-th="Faction">{% if card.faction_code[:7] != 'neutral' %}<span class="icon icon-{{ card.faction_code }} {{ card.faction_code }}"></span>{% endif %}</td>
-	<td data-th="Cost">{{ card.cost }}{{ card.advancementcost }}</td>
+        <td data-th="Faction">{{ card.faction_name }}</td>
+        <td data-th="Gold/Rank">{% if card.gold %}{{ card.gold }}{% elseif card.rank %}{{ card.rank }}{% endif %}</td>
+        <td data-th="Power">{{ card.power }}</td>
+        <td data-th="Life/Defense">{% if card.life %}{{ card.life }}{% elseif card.defense %}{{ card.defense }}{% endif %}</td>
 	<td data-th="Type" >{{ card.type_name }}</td>
-	<td data-th="&hellip;">{% if card.strength is not null %}{{ card.strength }}{% elseif card.agendapoints is not null %}{{ card.agendapoints }}{% else %}{{ card.trash }}{% endif %}</td>
 	<td data-th="Subtype">{{ card.subtype }}</td>
-	<td data-th="Influence">
-		{% if card.factioncost > 0 %}
-		<span class="influence-{{ card.cssfaction }}">
-			{% for i in 1..card.factioncost %}&#9679;{% if i%5==0 %}&nbsp;{% endif %}{% endfor %}
-		</span>
-		{% endif %}
-	</td>
-	<td data-th="Set"><span class="icon icon-{{ card.cycle_code }}"></span> {{ card.pack_name }} {{ card.position }}</td>
+	<td data-th="Set"> {{ card.pack_name }} - {{ card.position }}</td>
 </tr>
 {% endfor %}
 </table>

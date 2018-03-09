@@ -22,8 +22,8 @@ NRDB.user.params.decklist_id = Decklist.id;
 
 <div class="container decklist">
 
-{% if not decklist.is_legal %}
-    <div class="alert alert-warning" role="alert">This decklist is not legal for tournament play currently, due to <a href="https://www.fantasyflightgames.com/en/products/android-netrunner-the-card-game/">Card Errata</a>, <a href="https://www.fantasyflightgames.com/en/news/2014/11/5/when-new-programs-overwrite-the-old/">Rotation</a> or <a href="https://www.fantasyflightgames.com/en/products/android-netrunner-the-card-game/">the Most Wanted List</a>.</div>
+{% if false and  not decklist.is_legal %}
+        <div class="alert alert-warning" role="alert">This decklist is illegal for some reason</div>
 {% endif %}        
 <div class="row">
     <div class="col-xs-12 panel-group">
@@ -68,14 +68,10 @@ NRDB.user.params.decklist_id = Decklist.id;
     	<ul class="dropdown-menu" id="btn-group-decklist">
     		<li><a href="#" id="btn-copy-decklist">Copy into my decks</a></li>
 			<li><a href="#" id="btn-compare">Compare with another decklist</a></li>
-    		<li class="dropdown-header"><span class="glyphicon glyphicon-download"></span> Download</li>
-	    		<li><a href="#" id="btn-download-text">Text file</a></li>
-				<li><a href="#" id="btn-download-octgn">Octgn file</a></li>
     		<li class="dropdown-header"><span class="glyphicon glyphicon-export"></span> Export</li>
 				<li><a href="#" id="btn-export-bbcode">bbCode</a></li>
 				<li><a href="#" id="btn-export-markdown">Markdown (Reddit)</a></li>
 				<li><a href="#" id="btn-export-plaintext">Plain text</a></li>
-				<li><a href="#" id="btn-export-jintekinet">Jinteki.net format</a></li>
     		<li class="dropdown-header"><span class="glyphicon glyphicon-sort"></span> Sort</li>
 				<li><a href="#" id="btn-sort-type">by Type</a></li>
 				<li><a href="#" id="btn-sort-number">by Set</a></li>
@@ -114,24 +110,6 @@ NRDB.user.params.decklist_id = Decklist.id;
 <!-- Deck Content -->
 <div class="row" id="deck-content" style="margin-bottom:20px"></div>
 <!-- Deck Content -->
-
-<!-- MWL -->
-<table class="table table-condensed" id="table-mwl">
-<thead>
-<tr><th colspan="1"><span class="glyphicon glyphicon-bell"></span> Most Wanted List</th></tr>
-</thead>
-<tbody>
-{% for legality in legalities %}
-<tr>
-    <td>
-    	{% if legality.is_legal %}<span class="glyphicon glyphicon-thumbs-up" style="color:green"></span>
-    	{% else %}<span class="glyphicon glyphicon-thumbs-down" style="color:red"></span>{% endif %}
-    	<a href="#" class="change_mwl" data-code="{{ legality.code }}">{{ legality.name }}</a>
-    </td>
-</tr>
-{% endfor %}
-</tbody>
-</table>
 
 <!-- Rotation -->
 <table class="table table-condensed" id="table-rotation">
@@ -199,25 +177,6 @@ NRDB.user.params.decklist_id = Decklist.id;
 
 {% include 'AppBundle:Builder:draw-simulator.html.twig' %}
 
-<!-- Graphs -->
-<table class="table table-condensed" id="table-graph-costs">
-<thead>
-<tr><th colspan="1"><span class="glyphicon glyphicon-stats"></span> Repartition by Cost</th></tr>
-</thead>
-<tbody>
-<tr><td><div id="costChart"></div></td></tr>
-</tbody>
-</table>
-
-<table class="table table-condensed" id="table-graph-strengths">
-<thead>
-<tr><th colspan="1"><span class="glyphicon glyphicon-stats"></span> Repartition by Strength</th></tr>
-</thead>
-<tbody>
-<tr><td><div id="strengthChart"></div></td></tr>
-</tbody>
-</table>
-
 <table class="table table-condensed" id="table-predecessor">
 <thead>
 <tr><th colspan="{% if precedent_decklists|length %}4{% else %}1{% endif %}"><span class="glyphicon glyphicon-backward"></span> Derived from</th></tr>
@@ -259,18 +218,6 @@ NRDB.user.params.decklist_id = Decklist.id;
 </tbody>
 </table>
 
-<table class="table table-condensed" id="table-ext">
-<thead>
-<tr><th><span class="glyphicon glyphicon-list"></span> Include in your page (<a href="{{ path('demo_ext_decklist',{id:decklist.id}) }}">help</a>)</th></tr>
-</thead>
-<tbody>
-<tr>
-	<td>
-		<input style="width:100%;font-size:small" value="&lt;div data-id=&quot;{{ decklist.id }}&quot; class=&quot;nrdb-ext-decklist&quot;>&lt;script src=&quot;{{ app.request.getSchemeAndHttpHost() ~ '/ext-decklist.js' }}&quot;>&lt;/script>&lt;/div>">
-	</td>
-</tr>
-</tbody>
-</table>
 
 </div><!-- /#tools -->
 </div>

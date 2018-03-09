@@ -18,107 +18,61 @@ function getDisplayDescriptions(sort) {
         'type': [
             [// first column
 
-                {
-                    id: 'event',
-                    label: 'Event',
-                    image: '/bundles/app/images/types/event.png',
-                }, {
-                id: 'hardware',
-                label: 'Hardware',
-                image: '/bundles/app/images/types/hardware.png',
+            {
+                id: 'monster',
+                label: 'Monster',
+                image: null
             }, {
-                id: 'resource',
-                label: 'Resource',
-                image: '/bundles/app/images/types/resource.png',
+                id: 'mischief',
+                label: 'Mischief',
+                image: null
             }, {
-                id: 'agenda',
-                label: 'Agenda',
-                image: '/bundles/app/images/types/agenda.png',
+                id: 'loot',
+                label: 'Loot',
+                image: null
             }, {
-                id: 'asset',
-                label: 'Asset',
-                image: '/bundles/app/images/types/asset.png',
+                id: 'ally',
+                label: 'Ally',
+                image: null
             }, {
-                id: 'upgrade',
-                label: 'Upgrade',
-                image: '/bundles/app/images/types/upgrade.png',
+                id: 'location',
+                label: 'Location',
+                image: null
             }, {
-                id: 'operation',
-                label: 'Operation',
-                image: '/bundles/app/images/types/operation.png',
-            },
-            ],
-            [// second column
-                {
-                    id: 'icebreaker',
-                    label: 'Icebreaker',
-                    image: '/bundles/app/images/types/program.png',
-                }, {
-                id: 'program',
-                label: 'Program',
-                image: '/bundles/app/images/types/program.png',
-            }, {
-                id: 'barrier',
-                label: 'Barrier',
-                image: '/bundles/app/images/types/ice.png',
-            }, {
-                id: 'code-gate',
-                label: 'Code Gate',
-                image: '/bundles/app/images/types/ice.png',
-            }, {
-                id: 'sentry',
-                label: 'Sentry',
-                image: '/bundles/app/images/types/ice.png',
-            }, {
-                id: 'multi',
-                label: 'Multi',
-                image: '/bundles/app/images/types/ice.png',
-            }, {
-                id: 'none',
-                label: 'Other',
-                image: '/bundles/app/images/types/ice.png',
-            },
-            ],
+                id: 'notype',
+                label: 'Misc',
+                image: null
+            }
+            ]
         ],
         'faction': [
             [],
             [{
-                id: 'anarch',
-                label: 'Anarch',
+                id: 'bard',
+                label: 'Bard',
             }, {
-                id: 'criminal',
-                label: 'Criminal',
+                id: 'cleric',
+                label: 'Cleric'
             }, {
-                id: 'haas-bioroid',
-                label: 'Haas-Bioroid',
+                id: 'ranger',
+                label: 'Ranger'
             }, {
-                id: 'jinteki',
-                label: 'Jinteki',
+                id: 'warrior',
+                label: 'Warrior'
             }, {
-                id: 'nbn',
-                label: 'NBN',
+                id: 'wizard',
+                label: 'Wizard'
             }, {
-                id: 'shaper',
-                label: 'Shaper',
+                id: 'thief',
+                label: 'Thief'
             }, {
-                id: 'weyland-consortium',
-                label: 'Weyland Consortium',
+                id: 'neutral',
+                label: 'Neutral'
             }, {
-                id: 'neutral-corp',
-                label: 'Neutral',
-            }, {
-                id: 'neutral-runner',
-                label: 'Neutral',
-            }, {
-                id: 'adam',
-                label: 'Adam',
-            }, {
-                id: 'apex',
-                label: 'Apex',
-            }, {
-                id: 'sunny-lebeau',
-                label: 'Sunny Lebeau',
-            }],
+                id: 'nofaction',
+                label: 'No Faction'
+            }
+            ],
         ],
         'number': [],
         'title': [
@@ -135,12 +89,12 @@ function getDisplayDescriptions(sort) {
 function process_deck_by_type() {
 
     var bytype = {};
-    Identity = NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: 'identity' }).pop();
+    Identity = NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: 'hero' }).pop();
     if (!Identity) {
         return;
     }
 
-    NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: { '$ne': 'identity' } }, {
+    NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: { '$ne': 'hero' } }, {
         type: 1,
         title: 1,
     }).forEach(function (card) {
@@ -249,7 +203,7 @@ function get_influence_penalty_icons(card, qty) {
 }
 
 function find_identity() {
-    Identity = NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: 'identity' }).pop();
+    Identity = NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: 'hero' }).pop();
 }
 
 function update_deck(options) {
@@ -312,7 +266,7 @@ function update_deck(options) {
     InfluenceLimit = 0;
     var cabinet = {};
     var parts = Identity.title.split(/: /);
-    $('#identity').html('<a href="' + Routing.generate('cards_zoom', { card_code: Identity.code }) + '" data-target="#cardModal" data-remote="false" class="card" data-toggle="modal" data-index="' + Identity.code + '">' + parts[0] + ' <small>' + parts[1] + '</small></a>');
+    $('#identity').html('<a href="' + Routing.generate('cards_zoom', { card_code: Identity.code }) + '" data-target="#cardModal" data-remote="false" class="card" data-toggle="modal" data-index="' + Identity.code + '">' + parts[0]);
     $('#img_identity').prop('src', Identity.imageUrl);
     InfluenceLimit = Identity.influence_limit;
     if (typeof InfluenceLimit === "undefined")
@@ -353,7 +307,7 @@ function update_deck(options) {
 
     NRDB.data.cards.find({
         indeck: { '$gt': 0 },
-        type_code: { '$ne': 'identity' },
+        type_code: { '$ne': 'hero' },
     }, { '$orderBy': orderBy }).forEach(function (card) {
         if (latestpack.cycle.position < card.pack.cycle.position
             || (latestpack.cycle.position == card.pack.cycle.position && latestpack.position < card.pack.position)) {
@@ -524,12 +478,12 @@ function test_cacherefresh() {
 }
 
 function test_onesies() {
-    var all_cards = _.map(NRDB.data.cards.find({ type_code: { '$ne': 'identity' }, indeck: { '$gt': 0 } }), 'code'),
+    var all_cards = _.map(NRDB.data.cards.find({ type_code: { '$ne': 'hero' }, indeck: { '$gt': 0 } }), 'code'),
         accepted_cards = [];
 
     // core set check
     NRDB.data.cards.find({
-        type_code: { '$ne': 'identity' },
+        type_code: { '$ne': 'hero' },
         indeck: { '$gt': 0 },
         pack_code: 'core',
     }).forEach(function (card) {
@@ -540,7 +494,7 @@ function test_onesies() {
 
     // deluxe and datapack check
     var remaining_cards = NRDB.data.cards.find({
-        type_code: { '$ne': 'identity' },
+        type_code: { '$ne': 'hero' },
         indeck: { '$gt': 0 },
         pack_code: { '$ne': 'core' },
         code: { '$nin': accepted_cards },
@@ -575,13 +529,13 @@ function test_onesies() {
 
 function check_decksize() {
     DeckSize = _.reduce(
-        NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: { '$ne': 'identity' } }),
+        NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: { '$ne': 'hero' } }),
         function (acc, card) {
             return acc + card.indeck;
         },
         0);
     MinimumDeckSize = Identity.minimum_deck_size;
-    $('#cardcount').html(DeckSize + " cards (min " + MinimumDeckSize + ")")[DeckSize < MinimumDeckSize ? 'addClass' : 'removeClass']("text-danger");
+    $('#cardcount').html(DeckSize + " cards")[DeckSize != 40 ? 'addClass' : 'removeClass']("text-danger");
     if (Identity.side_code == 'corp') {
         AgendaPoints = _.reduce(
             NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: 'agenda' }),
@@ -674,7 +628,6 @@ function check_influence(influenceSpent) {
         displayInfluenceLimit = "&#8734;";
     }
     var isOver = remainingInfluence < InfluenceSpent;
-    $('#influence').html(InfluenceSpent + " influence spent (max " + displayInfluenceLimit + ", available " + availableInfluence + ")")[isOver ? 'addClass' : 'removeClass']("text-danger");
 }
 
 function check_restricted() {
@@ -742,7 +695,7 @@ $(function () {
         container: 'body',
         placement: 'bottom',
         trigger: 'click',
-        title: "<h5>Smart filter syntax</h5><ul style=\"text-align:left\"><li>x: filters on text</li><li>a: flavor text</li><li>s: subtype</li><li>o: cost</li><li>v: agenda points</li><li>n: faction cost</li><li>p: strength</li><li>g: advancement cost</li><li>h: trash cost</li><li>u: uniqueness</li><li>y: quantity in pack</li></ul><code>s:\"code gate\" x:trace</code> to find code gates with trace<h5>In-text symbols</h5><ul style=\"text-align:left\"><li>[subroutine]</li><li>[credit]</li><li>[trash]</li><li>[click]</li><li>[recurring-credit]</li><li>[mu]</li><li>[link]</li><li>[anarch]</li><li>[criminal]</li><li>[shaper]</li><li>[jinteki]</li><li>[haas-bioroid]</li><li>[nbn]</li><li>[weyland-consortium]</li><li>&lt;trace&gt;</li><li>&lt;errata&gt;</li></ul>",
+        title: "<h5>Smart filter syntax</h5><ul style=\"text-align:left\"><li>x: filters on text</li><li>t: type</li><li>s: subtype</li></ul></h5>"
     });
 });
 
@@ -781,7 +734,7 @@ function build_bbcode(deck) {
     var lines = [];
     lines.push("[b]" + SelectedDeck.name + "[/b]");
     lines.push("");
-    lines.push('[url=https://netrunnerdb.com/' + NRDB.locale + '/card/'
+    lines.push('[url=https://munchkindb.com/' + NRDB.locale + '/card/'
         + Identity.code
         + ']'
         + Identity.title
@@ -799,7 +752,7 @@ function build_bbcode(deck) {
                 var qty = $(line).ignore("a, span, small").text().trim().replace(/x.*/, "x");
                 var inf = $(line).find("span").text().trim();
                 var card = NRDB.data.cards.findById($(line).find('a.card').data('index'));
-                lines.push(qty + ' [url=https://netrunnerdb.com/' + NRDB.locale + '/card/'
+                lines.push(qty + ' [url=https://munchkindb.com/' + NRDB.locale + '/card/'
                     + card.code
                     + ']'
                     + card.title
@@ -819,9 +772,9 @@ function build_bbcode(deck) {
     lines.push($('#latestpack').text());
     lines.push("");
     if (typeof Decklist != "undefined" && Decklist != null) {
-        lines.push("Decklist [url=" + location.href + "]published on NetrunnerDB[/url].");
+        lines.push("Decklist [url=" + location.href + "]published on MunchkinDB[/url].");
     } else {
-        lines.push("Deck built on [url=https://netrunnerdb.com]NetrunnerDB[/url].");
+        lines.push("Deck built on [url=https://munchkindb.com]MunchkinDB[/url].");
     }
     return lines;
 }
@@ -838,7 +791,7 @@ function build_markdown(deck) {
     lines.push("");
     lines.push('['
         + Identity.title
-        + '](https://netrunnerdb.com/' + NRDB.locale + '/card/'
+        + '](https://munchkindb.com/' + NRDB.locale + '/card/'
         + Identity.code
         + ') _('
         + Identity.pack.name
@@ -856,7 +809,7 @@ function build_markdown(deck) {
                 var card = NRDB.data.cards.findById($(line).find('a.card').data('index'));
                 lines.push('* ' + qty + ' ['
                     + card.title
-                    + '](https://netrunnerdb.com/' + NRDB.locale + '/card/'
+                    + '](https://munchkindb.com/' + NRDB.locale + '/card/'
                     + card.code
                     + ') _('
                     + card.pack.name
@@ -875,9 +828,9 @@ function build_markdown(deck) {
     lines.push($('#latestpack').text() + "  ");
     lines.push("");
     if (typeof Decklist != "undefined" && Decklist != null) {
-        lines.push("Decklist [published on NetrunnerDB](" + location.href + ").");
+        lines.push("Decklist [published on MunchkinDB](" + location.href + ").");
     } else {
-        lines.push("Deck built on [NetrunnerDB](https://netrunnerdb.com).");
+        lines.push("Deck built on [MunchkinDB](https://munchkindb.com).");
     }
     return lines;
 }
@@ -914,9 +867,9 @@ function build_plaintext(deck) {
     lines.push($('#latestpack').text());
     lines.push("");
     if (typeof Decklist != "undefined" && Decklist != null) {
-        lines.push("Decklist published on https://netrunnerdb.com.");
+        lines.push("Decklist published on https://munchkindb.com.");
     } else {
-        lines.push("Deck built on https://netrunnerdb.com.");
+        lines.push("Deck built on https://munchkindb.com.");
     }
     return lines;
 }
@@ -948,7 +901,7 @@ function export_jintekinet() {
 function make_cost_graph() {
     var costs = [];
 
-    NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: { '$ne': 'identity' } }).forEach(function (card) {
+    NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: { '$ne': 'hero' } }).forEach(function (card) {
         if (card.cost != null) {
             if (costs[card.cost] == null)
                 costs[card.cost] = [];
@@ -978,49 +931,13 @@ function make_cost_graph() {
             cost_series[i].data.push(data && data[type_name] ? data[type_name] : 0);
         }
     }
-
-    $('#costChart').highcharts({
-        colors: Identity.side_code === 'runner' ? ['#FFE66F', '#316861', '#97BF63', '#5863CC'] : ['#FFE66F', '#B22A95', '#FF55DA', '#30CCC8'],
-        title: {
-            text: null,
-        },
-        credits: {
-            enabled: false,
-        },
-        chart: {
-            type: 'column',
-            animation: false,
-        },
-        xAxis: {
-            categories: xAxis,
-        },
-        yAxis: {
-            title: {
-                text: null,
-            },
-            allowDecimals: false,
-            minTickInterval: 1,
-            minorTickInterval: 1,
-            endOnTick: false,
-        },
-        plotOptions: {
-            column: {
-                stacking: 'normal',
-            },
-            series: {
-                animation: false,
-            },
-        },
-        series: cost_series,
-    });
-
 }
 
 function make_strength_graph() {
     var strengths = [];
     var ice_types = ['Barrier', 'Code Gate', 'Sentry', 'Other'];
 
-    NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: { '$ne': 'identity' } }).forEach(function (card) {
+    NRDB.data.cards.find({ indeck: { '$gt': 0 }, type_code: { '$ne': 'hero' } }).forEach(function (card) {
         if (card.strength != null) {
             if (strengths[card.strength] == null)
                 strengths[card.strength] = [];
@@ -1051,42 +968,6 @@ function make_strength_graph() {
             strength_series[i].data.push(data && data[type_name] ? data[type_name] : 0);
         }
     }
-
-    $('#strengthChart').highcharts({
-        colors: ['#487BCC', '#B8EB59', '#FF6251', '#CCCCCC'],
-        title: {
-            text: null,
-        },
-        credits: {
-            enabled: false,
-        },
-        chart: {
-            type: 'column',
-            animation: false,
-        },
-        xAxis: {
-            categories: xAxis,
-        },
-        yAxis: {
-            title: {
-                text: null,
-            },
-            allowDecimals: false,
-            minTickInterval: 1,
-            minorTickInterval: 1,
-            endOnTick: false,
-        },
-        plotOptions: {
-            column: {
-                stacking: 'normal',
-            },
-            series: {
-                animation: false,
-            },
-        },
-        series: strength_series,
-    });
-
 }
 
 //binomial coefficient module, shamelessly ripped from https://github.com/pboyer/binomial.js

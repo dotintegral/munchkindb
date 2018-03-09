@@ -74,22 +74,12 @@ var Identity = null,
 	</div>
 	<div class="btn-group" style="margin-bottom:5px">
 		<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-			<span class="glyphicon glyphicon-download"></span> Download <span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu" role="menu">
-			<li><a href="#" id="btn-download-text">Text file</a></li>
-			<li><a href="#" id="btn-download-octgn">Octgn file</a></li>
-		</ul>
-	</div>
-	<div class="btn-group" style="margin-bottom:5px">
-		<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
 			<span class="glyphicon glyphicon-export"></span> Export <span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" role="menu">
 			<li><a href="#" id="btn-display-plain">Plain</a></li>
 			<li><a href="#" id="btn-display-bbcode">bbCode</a></li>
 			<li><a href="#" id="btn-display-markdown">Markdown</a></li>
-			<li><a href="#" id="btn-display-jintekinet">Jinteki.net</a></li>
 		</ul>
 	</div>
 </div>
@@ -136,29 +126,6 @@ var Identity = null,
 <!-- Description -->
 
 {% include 'AppBundle:Builder:draw-simulator.html.twig' %}
-
-<!-- Graphs -->
-<table class="table table-condensed" id="table-graph-costs">
-<thead>
-<tr><th colspan="1"><span class="glyphicon glyphicon-stats"></span> Repartition by Cost</th></tr>
-</thead>
-<tbody>
-<tr>
-	<td><div id="costChart"></div></td>
-</tr>
-</tbody>
-</table>
-
-<table class="table table-condensed" id="table-graph-strengths">
-<thead>
-<tr><th colspan="1"><span class="glyphicon glyphicon-stats"></span> Repartition by Strength</th></tr>
-</thead>
-<tbody>
-<tr>
-	<td><div id="strengthChart"></div></td>
-</tr>
-</tbody>
-</table>
 
 <!-- Published decklists Table -->
 <table class="table table-condensed" id="table-predecessor">
@@ -319,9 +286,6 @@ var Identity = null,
 								{% endfor %}
 								</select>
 							</div>
-                                                        <div class="form-group">
-                                                                <span class="help-block">By submitting content, you agree to the <a href="{{ path('cards_about') }}#code-of-conduct">Code of Conduct</a> of the website.</span>
-                                                        </div>
 							<div class="pull-right">
 								<button type="submit" id="btn-publish-submit" class="btn btn-success">Checking...</button>
 								<button type="button" class="btn btn-default" onclick="$('#publishModal').modal('hide')">Cancel</button>

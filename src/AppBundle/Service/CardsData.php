@@ -14,18 +14,13 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class CardsData {
 
     public static $faction_letters = [
-        'haas-bioroid' => 'h',
-        'weyland-consortium' => 'w',
-        'anarch' => 'a',
-        'shaper' => 's',
-        'criminal' => 'c',
-        'jinteki' => 'j',
-        'nbn' => 'n',
-        'neutral-corp' => '-',
-        'neutral-runner' => '-',
-        'apex' => 'p',
-        'adam' => 'd',
-        'sunny-lebeau' => 'u',
+        'cleric' => 'c',
+        'ranger' => 'r',
+        'wizard' => 'z',
+        'warrior' => 'w',
+        'thief' => 't',
+        'bard' => 'b',
+        'neutral' => 'n',
     ];
 
     /* @var Registry */
@@ -167,12 +162,13 @@ class CardsData {
                 case '': // title or index
                     $or = array();
                     foreach ($condition as $arg) {
-                        $code = preg_match('/^\d\d\d\d\d$/u', $arg);
+                        $code = preg_match('/^(OA)?[0-9]*$/u', $arg);
                         $acronym = preg_match('/^[A-Z]{2,}$/', $arg);
                         if ($code) {
                             $or[] = "(c.code = ?$i)";
                             $parameters[$i++] = $arg;
                         } else if ($acronym) {
+                                die('foobar');
                             $or[] = "(BINARY(c.title) like ?$i)";
                             $parameters[$i++] = "%$arg%";
                             $like = implode('% ', str_split($arg));
@@ -578,11 +574,18 @@ class CardsData {
             "agendapoints" => $card->getAgendaPoints(),
             "baselink" => $card->getBaseLink(),
             "cost" => $card->getCost(),
+	    "gold" => $card->getGold(),
+	    "rank" => $card->getRank(),
+	    "life" => $card->getLife(),
+	    "defense" => $card->getDefense(),
+	    "power" => $card->getPower(),
+	    "rarity" => $card->getRarity(),
             "faction_name" => $card->getFaction()->getName(),
             "faction_code" => $card->getFaction()->getCode(),
             "factioncost" => $card->getFactionCost(),
             "flavor" => $card->getFlavor(),
             "illustrator" => $card->getIllustrator(),
+	    "colorist" => $card->getColorist(),
             "influencelimit" => $card->getInfluenceLimit(),
             "memoryunits" => $card->getMemoryCost(),
             "minimumdecksize" => $card->getMinimumDeckSize(),

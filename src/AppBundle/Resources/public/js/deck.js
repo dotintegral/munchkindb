@@ -13,9 +13,9 @@ function update_max_qty() {
         if(card.pack_code == 'core' || card.pack_code == 'core2') {
             max_qty = Math.min(card.quantity * NRDB.settings.getItem('core-sets'), max_qty);
         }
-        if(Identity.pack_code == "draft") {
-            max_qty = 9;
-        }
+        //if(Identity.pack_code == "draft") {
+        //    max_qty = 9;
+        //}
         NRDB.data.cards.updateById(card.code, {
             maxqty : max_qty
         });
@@ -57,11 +57,10 @@ Promise.all([NRDB.data.promise, NRDB.settings.promise]).then(function() {
 				: a.code.localeCompare(b.code);
 	});
 	factions.forEach(function(faction) {
-		var label = $('<label class="btn btn-default btn-sm" data-code="' + faction.code
-				+ '" title="'+faction.name+'"><input type="checkbox" name="' + faction.code
-				+ '"><img src="'
-				+ Url_FactionImage.replace('xxx', faction.code)
-				+ '" style="height:12px" alt="'+faction.code+'"></label>');
+		var label = $('<label class="btn btn-default btn-md btn-block" data-code="' + faction.code
+				+ '" title="'+faction.name+'"><input type="checkbox" name="' + faction.code + '">'
+				+ '<span>' + faction.code.slice(0,3) + '</span>'
+				+ '</label>');
 		label.tooltip({container: 'body'});
 		$('#faction_code').append(label);
 	});
@@ -70,26 +69,24 @@ Promise.all([NRDB.data.promise, NRDB.settings.promise]).then(function() {
 	$('#faction_code').children('label[data-code='+Identity.faction_code+']').each(function(index, elt) {
 		$(elt).button('toggle');
 	});
+	$('#faction_code').children('label[data-code=neutral]').each(function(index, elt) {
+		$(elt).button('toggle');
+	});
 
 	$('#type_code').empty();
 	var types = NRDB.data.types.find({
-		is_subtype:false,
-		'$or': [{
-			side_code: Identity.side_code
-		},{
-			side_code: null
-		}]
+		is_subtype: false,
+		code: { '$ne': 'hero' }
 	}).sort();
 	types.forEach(function(type) {
 		var label = $('<label class="btn btn-default btn-sm" data-code="'
-				+ type.code + '" title="'+type.name+'"><input type="checkbox" name="' + type.code
-				+ '"><img src="' + Url_TypeImage.replace('xxx', type.code)
-				+ '" style="height:12px" alt="'+type.code+'"></label>');
+				+ type.code + '" title="' + type.name + '"><input type="checkbox" name="' + type.code + '">'
+				+ '<span>'+type.code.slice(0,2)+'</span></label>');
 		label.tooltip({container: 'body'});
 		$('#type_code').append(label);
 	});
 	$('#type_code').button();
-	$('#type_code').children('label:first-child').each(function(index, elt) {
+	$('#type_code').children().each(function(index, elt) {
 		$(elt).button('toggle');
 	});
 	
@@ -359,7 +356,7 @@ $(function() {
 					+ ')';
 		},
 		index : 1
-	}, {
+	}/*, {
 		match : /\$([\-+\w]*)$/,
 		search : function(term, callback) {
 			var regexp = new RegExp('^' + term);
@@ -375,7 +372,7 @@ $(function() {
 			return '<span class="icon icon-' + value + '"></span>';
 		},
 		index : 1
-	}]);
+	}*/]);
 	$('#mwl_code').on('change', update_mwl);
 	$('#tbody-history').on('click', 'a[role=button]', load_snapshot);
 	setInterval(autosave_interval, 1000);
@@ -523,7 +520,7 @@ function handle_quantity_change(event) {
 		indeck : quantity
 	});
 	var card = NRDB.data.cards.findById(index);
-	if (card.type_code == "identity") {
+	if (card.type_code == "hero") {
 		if (Identity.faction_code != card.faction_code) {
 			// change of faction, reset agendas
 			NRDB.data.cards.update({
@@ -545,7 +542,7 @@ function handle_quantity_change(event) {
 			indeck : {
 				'$gt' : 0
 			},
-			type_code : 'identity',
+			type_code : 'hero',
 			code : {
 				'$ne' : index
 			}
@@ -554,7 +551,7 @@ function handle_quantity_change(event) {
 		});
 	}
 	update_deck();
-	if (card.type_code == "identity") {
+	if (card.type_code == "hero") {
 		NRDB.draw_simulator.reset();
 		$.each(CardDivs, function(nbcols, rows) {
 			if (rows)
@@ -622,6 +619,7 @@ function update_mwl(event) {
 
 function build_div(record) {
 	var influ = "";
+	var subtype = record.keywords ? record.keywords : '';
 	for (var i = 0; i < record.faction_cost; i++)
 		influ += "●";
 
@@ -650,12 +648,11 @@ function build_div(record) {
 				+ '</div></td><td><a class="card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})
 				+ '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
-				+ record.title + '</a> '+get_influence_penalty_icons(record)+'</td><td class="influence influence-' + record.faction_code
-				+ '">' + influ + '</td><td class="type" title="' + record.type.name
-				+ '"><img src="/bundles/app/images/types/'
-				+ record.type_code + '.png" alt="'+record.type.name+'">'
-				+ '</td><td class="faction" title="' + record.faction.name + '">'
-				+ imgsrc + '</td></tr>');
+				+ record.title + '</a> '+get_influence_penalty_icons(record)+'</td>'
+				+ '<td class="type" title="' + record.type.name + '"><span>' + record.type.name + '</span></td>'
+				+ '<td class="subtype" title="' + subtype + '"><span>' + subtype + '</span></td>'
+				+ '<td class="faction" title="' + record.type.name + '"><span>' + record.faction.name + '</span></td>'
+				+ '</tr>');
 		break;
 
 	case 2:
@@ -664,7 +661,7 @@ function build_div(record) {
 				+ record.code
 				+ '">'
 				+ '<div class="media"><div class="media-left">'
-				+ '<img class="media-object" src="'+record.imageUrl+'" alt="'+record.title+'">'
+				+ '<span>'+record.title+'</span>'
 				+ '</div><div class="media-body">'
 				+ '    <h4 class="media-heading"><a class="card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})
@@ -681,7 +678,7 @@ function build_div(record) {
 				+ record.code
 				+ '">'
 				+ '<div class="media"><div class="media-left">'
-				+ '<img class="media-object" src="'+record.imageUrl+'" alt="'+record.title+'">'
+				+ '<span>'+record.title+'</span>'
 				+ '</div><div class="media-body">'
 				+ '    <h5 class="media-heading"><a class="card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})

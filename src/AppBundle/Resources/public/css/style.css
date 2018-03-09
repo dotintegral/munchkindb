@@ -1,4 +1,14 @@
-body {font-size:16px;font-family: 'LatoWeb', sans-serif;}
+body {
+	font-size:16px;
+	font-family: 'Lato', sans-serif;
+}
+
+a {
+	color: #006691;
+}
+a:hover {
+	color: #033F59;
+}
 
 .social{color:darkgray}
 .social>div>a, .social>div>span{margin:0 10px}
@@ -111,9 +121,9 @@ article.tsr ol{list-style:none}
 article.tsr em{text-transform:uppercase;font-weight:bold;font-style:normal}
 article.rules nav.inner{float:right;border-left:1px solid red;border-bottom:1px solid red;margin-left:20px}
 
-html,body{height:100%;background:lightgray}
-#wrapper{background:white;padding-bottom:50px;border-bottom:1px solid silver;}
-footer{padding:50px 0;color:darkgray}
+html,body{height:100%;background:#C5DFA2}
+#wrapper{background:#FFFFFC;padding-bottom:50px;border-bottom:1px solid silver;}
+footer{padding:50px 0;}
 .color-corp{color:blue}
 .color-runner{color:red}
 .fake-inline-button{white-space:nowrap}
@@ -215,6 +225,15 @@ tbody .btn-group{white-space:nowrap}
   margin: 0;
 }
 
+h1, h2, h3, h4, h5, label, th {
+	font-family: 'Merriweather', serif;
+	font-weight: bold;
+}
+
+#cardModal h4 {
+	font-style: italic;
+}
+
 #deck-description > h1 {
 font-size: 24px;
 font-family: inherit;
@@ -227,8 +246,12 @@ font-size: 20px;
 font-size: 18px;
 }
 
+h1, h2 {
+	color: #DA4121;
+}
+
 #index_page .section {
-	color: crimson;
+	color: #DA4121;
 }
 .deck-list-group-item {
 	box-sizing: content-box;
@@ -414,6 +437,9 @@ article.review .review-date { clear: both; text-align: right }
 article.review .review-latestpack { clear: both; text-align: right }
 article.review .review-author { text-align: right }
 article.review .review-comment { border-top: 1px solid #ddd; padding: 0.5em; }
+article.review p {
+	word-wrap: break-word;
+}
 @media (min-width: 992px) {
 	#recent_decklists, #recent_reviews {
 		 border-left:1px solid #ddd;
@@ -447,10 +473,25 @@ div.ad-blocked {
 	position: absolute;
 	left: 15px;
 }
+nav.navbar {
+	background: #A9DEF0;
+	border: none;
+}
+nav.navbar .navbar-collapse {
+	border: none;
+}
+nav.navbar .navbar-form {
+	border: none;
+}
+nav.navbar .navbar-brand, nav.navbar .navbar-nav > li > a {
+	color: #000100;
+	font-family: 'Merriweather', serif;
+	font-weight: bold;
+	font-style: italic;
+}
 .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-nav>li>a:hover {
-	background: grey;
-	color: black;
 	text-shadow: 0px 0px 5px #ccc;
+	color: #DA4121;
 }
 .navbar-brand .icon {
 	font-size: 120%;
@@ -471,6 +512,12 @@ div.ad-blocked {
 }
 .dropdown-menu {
     z-index: 1060 !important;
+}
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+	color: black;
+}
+.navbar-inverse .navbar-toggle {
+	border: none;
 }
 .dropdown-menu input[type=text].form-control {
 	width: auto;
