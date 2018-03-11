@@ -469,6 +469,13 @@ div.ad-blocked {
 .navbar-brand {
 	position: relative;
 }
+.navbar-brand img {
+	width: 60px;
+	float: left;
+	position: relative;
+	top: -11px;
+	margin-right: 3px;
+}
 .navbar-brand span.icon:nth-child(2) {
 	position: absolute;
 	left: 15px;
@@ -476,6 +483,7 @@ div.ad-blocked {
 nav.navbar {
 	background: #A9DEF0;
 	border: none;
+	margin-bottom: 27px;
 }
 nav.navbar .navbar-collapse {
 	border: none;

@@ -4,7 +4,7 @@
     <title>{{ pagetitle|default('Deckbuilder') }} &middot; MunchkinDB</title>
     <link rel="icon" sizes="16x16" href="/favicon.png" />
     <link rel="icon" sizes="196x196" href="/icon.png" />
-    <link rel="apple-touch-icon" sizes="129x129" href="/apple-touch-icon.png" />
+    <!-- TODO: <link rel="apple-touch-icon" sizes="129x129" href="/apple-touch-icon.png" /> -->
 {% if app.request.locale != "en" and app.request.attributes.get('_route') != "" %}
 {% set _route_params = app.request.attributes.get('_route_params')|default({}) %}
 {% set _get_params = app.request.query.all()|default({}) %}
@@ -105,8 +105,8 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="{{ path('netrunnerdb_index') }}">
-            <span></span>
-                Munchkin Databass 
+                <img src="/icon.png" />
+                Munchkin Databass
           </a>
         </div>
         <div class="navbar-collapse collapse">
