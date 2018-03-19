@@ -9,6 +9,13 @@ a {
 a:hover {
 	color: #033F59;
 }
+.trademark {
+        font-size: 12px;
+        position: relative;
+        top: -5px;
+        left: -1px;
+}
+
 
 .social{color:darkgray}
 .social>div>a, .social>div>span{margin:0 10px}
