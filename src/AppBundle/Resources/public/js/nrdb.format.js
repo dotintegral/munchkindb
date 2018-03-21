@@ -8,22 +8,16 @@
         var type = '<span class="card-type">' + card.type.name + '</span>';
         if (card.keywords)
             type += '<span class="card-keywords">: ' + card.keywords + '</span>';
-        if (card.type_code == "agenda")
-            type += ' &middot; <span class="card-prop">' + card.advancement_cost + '/' + card.agenda_points + '</span>';
-        if (card.type_code == "identity" && card.side_code == "corp")
-            type += ' &middot; <span class="card-prop">' + card.minimum_deck_size + '/' + (card.influence_limit || '&infin;') + '</span>';
-        if (card.type_code == "identity" && card.side_code == "runner")
-            type += ' &middot; <span class="card-prop">' + card.minimum_deck_size + '/' + (card.influence_limit || '&infin;') + ' ' + card.base_link + '<span class="icon icon-link"></span></span>';
-        if (card.type_code == "operation" || card.type_code == "event")
-            type += ' &middot; <span class="card-prop">' + format.cost(card) + '<span class="icon icon-credit"></span>' + ('trash_cost' in card ? ' ' + card.trash_cost + '<span class="icon icon-trash">' : '') + '</span>';
-        if (card.type_code == "resource" || card.type_code == "hardware")
-            type += ' &middot; <span class="card-prop">' + format.cost(card) + '<span class="icon icon-credit"></span></span>';
-        if (card.type_code == "program")
-            type += ' &middot; <span class="card-prop">' + format.cost(card) + '<span class="icon icon-credit"></span> ' + card.memory_cost + '<span class="icon icon-mu"></span></span>';
-        if (card.type_code == "asset" || card.type_code == "upgrade")
-            type += ' &middot; <span class="card-prop">' + format.cost(card) + '<span class="icon icon-credit"></span> ' + card.trash_cost + '<span class="icon icon-trash"></span></span>';
-        if (card.type_code == "ice")
-            type += ' &middot; <span class="card-prop">' + format.cost(card) + '<span class="icon icon-credit"></span>' + ('trash_cost' in card ? ' ' + card.trash_cost + '<span class="icon icon-trash">' : '') + '</span></span>';
+	if (card.gold)
+            type += ' &middot; <span class="card-prop"> Gold: ' + card.gold + '</span>';
+	if (card.rank)
+            type += ' &middot; <span class="card-prop"> Rank: ' + card.rank + '</span>';
+	if (card.life)
+            type += ' &middot; <span class="card-prop"> Life: ' + card.life + '</span>';
+        if (card.power)
+            type += ' &middot; <span class="card-prop"> Power: ' + card.power + '</span>';
+        if (card.defense)
+            type += ' &middot; <span class="card-prop"> Defense: ' + card.defense + '</span>';
         return type;
     };
 

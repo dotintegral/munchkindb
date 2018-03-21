@@ -10,7 +10,7 @@ a:hover {
 	color: #033F59;
 }
 .trademark {
-        font-size: 12px;
+        font-size: 11px;
         position: relative;
         top: -5px;
         left: -1px;
@@ -27,6 +27,15 @@ a:hover {
 .card-text p{margin:6px}
 .card-flavor{font-style:italic}
 .pack-future, .card-preview{color:red}
+.code {
+    color: #939393;
+}
+.card .code {
+    font-size: 13px;
+}
+.modal-title.card-title .code {
+	font-size: 15px;
+}
 /* */
 
 

@@ -23,7 +23,7 @@
 		var card = NRDB.data.cards.findById(code);
 		modal.data('index', code);
 		modal.find('.card-modal-link').attr('href', Routing.generate('cards_zoom',{card_code:card.code}));
-		modal.find('h3.modal-title').html((card.uniqueness ? "&diams; " : "")+card.title);
+		modal.find('h3.modal-title').html((card.uniqueness ? "&diams; " : "")+card.title + ' <span class="code">#'+card.code+'</span>');
 		modal.find('.modal-image').html('<img class="img-responsive" src="'+card.imageUrl+'" alt="'+card.title+'">');
 		modal.find('.modal-info').html(
 		  '<div class="card-info">'+NRDB.format.type(card)+'</div>'

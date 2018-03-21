@@ -49,7 +49,7 @@ Promise.all([NRDB.data.promise, NRDB.settings.promise]).then(function() {
 
 	$('#faction_code').empty();
 	
-	var factions = NRDB.data.factions.find({side_code: Side}).sort(function(a, b) {
+	var factions = NRDB.data.factions.find({side_code: Side, code: {"$ne": "nofaction"}}).sort(function(a, b) {
 		return b.code.substr(0,7) === "neutral" 
 			? -1
 			: a.code.substr(0,7) === "neutral" 
@@ -79,9 +79,12 @@ Promise.all([NRDB.data.promise, NRDB.settings.promise]).then(function() {
 		code: { '$ne': 'hero' }
 	}).sort();
 	types.forEach(function(type) {
+		var typeLabel = type.code.slice(0,2);
+		if(type.code === 'location')
+			typeLabel = 'loc';
 		var label = $('<label class="btn btn-default btn-sm" data-code="'
 				+ type.code + '" title="' + type.name + '"><input type="checkbox" name="' + type.code + '">'
-				+ '<span>'+type.code.slice(0,2)+'</span></label>');
+				+ '<span>'+typeLabel+'</span></label>');
 		label.tooltip({container: 'body'});
 		$('#type_code').append(label);
 	});
@@ -395,7 +398,7 @@ function add_snapshot(snapshot) {
 		$.each(snapshot.variation[0], function (code, qty) {
 			var card = NRDB.data.cards.findById(code);
 			if(!card) return;
-			list.push('+'+qty+' '+'<a href="'+Routing.generate('cards_zoom',{card_code:code})+'" class="card" data-index="'+code+'">'+card.title+'</a>');
+			list.push('+'+qty+' '+'<a href="'+Routing.generate('cards_zoom',{card_code:code})+'" class="card" data-index="'+code+'">'+card.title+'<span class="code">#'+card.code+'</span></a>');
 		});
 		$.each(snapshot.variation[1], function (code, qty) {
 			var card = NRDB.data.cards.findById(code);
