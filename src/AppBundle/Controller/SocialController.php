@@ -491,47 +491,47 @@ class SocialController extends Controller
             $this->get('doctrine')->getManager()->flush();
 
             // send emails
-            $spool = array();
-            if($decklist->getUser()->getNotifAuthor()) {
-                if(!isset($spool[$decklist->getUser()->getEmail()])) {
-                    $spool[$decklist->getUser()->getEmail()] = 'AppBundle:Emails:newcomment_author.html.twig';
-                }
-            }
-            foreach($decklist->getComments() as $comment) {
-                /* @var $comment Comment */
-                $commenter = $comment->getAuthor();
-                if($commenter && $commenter->getNotifCommenter()) {
-                    if(!isset($spool[$commenter->getEmail()])) {
-                        $spool[$commenter->getEmail()] = 'AppBundle:Emails:newcomment_commenter.html.twig';
-                    }
-                }
-            }
-            foreach($mentionned_usernames as $mentionned_username) {
-                /* @var $mentionned_user User */
-                $mentionned_user = $this->getDoctrine()->getRepository('AppBundle:User')->findOneBy(array('username' => $mentionned_username));
-                if($mentionned_user && $mentionned_user->getNotifMention()) {
-                    if(!isset($spool[$mentionned_user->getEmail()])) {
-                        $spool[$mentionned_user->getEmail()] = 'AppBundle:Emails:newcomment_mentionned.html.twig';
-                    }
-                }
-            }
-            unset($spool[$user->getEmail()]);
+            //$spool = array();
+            //if($decklist->getUser()->getNotifAuthor()) {
+            //    if(!isset($spool[$decklist->getUser()->getEmail()])) {
+            //        $spool[$decklist->getUser()->getEmail()] = 'AppBundle:Emails:newcomment_author.html.twig';
+            //    }
+            //}
+            //foreach($decklist->getComments() as $comment) {
+            //    /* @var $comment Comment */
+            //    $commenter = $comment->getAuthor();
+            //    if($commenter && $commenter->getNotifCommenter()) {
+            //        if(!isset($spool[$commenter->getEmail()])) {
+            //            $spool[$commenter->getEmail()] = 'AppBundle:Emails:newcomment_commenter.html.twig';
+            //        }
+            //    }
+            //}
+            //foreach($mentionned_usernames as $mentionned_username) {
+            //    /* @var $mentionned_user User */
+            //    $mentionned_user = $this->getDoctrine()->getRepository('AppBundle:User')->findOneBy(array('username' => $mentionned_username));
+            //    if($mentionned_user && $mentionned_user->getNotifMention()) {
+            //        if(!isset($spool[$mentionned_user->getEmail()])) {
+            //            $spool[$mentionned_user->getEmail()] = 'AppBundle:Emails:newcomment_mentionned.html.twig';
+            //        }
+            //    }
+            //}
+            //unset($spool[$user->getEmail()]);
 
-            $email_data = array(
-                'username' => $user->getUsername(),
-                'decklist_name' => $decklist->getName(),
-                'url' => $this->generateUrl('decklist_detail', array('decklist_id' => $decklist->getId(), 'decklist_name' => $decklist->getPrettyname()), UrlGeneratorInterface::ABSOLUTE_URL) . '#' . $comment->getId(),
-                'comment' => $comment_html,
-                'profile' => $this->generateUrl('user_profile', array(), UrlGeneratorInterface::ABSOLUTE_URL)
-            );
-            foreach($spool as $email => $view) {
-                $message = \Swift_Message::newInstance()
-                        ->setSubject("[NetrunnerDB] New comment")
-                        ->setFrom(array("alsciende@netrunnerdb.com" => $user->getUsername()))
-                        ->setTo($email)
-                        ->setBody($this->renderView($view, $email_data), 'text/html');
-                $this->get('mailer')->send($message);
-            }
+            //$email_data = array(
+            //    'username' => $user->getUsername(),
+            //    'decklist_name' => $decklist->getName(),
+            //    'url' => $this->generateUrl('decklist_detail', array('decklist_id' => $decklist->getId(), 'decklist_name' => $decklist->getPrettyname()), UrlGeneratorInterface::ABSOLUTE_URL) . '#' . $comment->getId(),
+            //    'comment' => $comment_html,
+            //    'profile' => $this->generateUrl('user_profile', array(), UrlGeneratorInterface::ABSOLUTE_URL)
+            //);
+            //foreach($spool as $email => $view) {
+            //    $message = \Swift_Message::newInstance()
+            //            ->setSubject("[NetrunnerDB] New comment")
+            //            ->setFrom(array("alsciende@netrunnerdb.com" => $user->getUsername()))
+            //            ->setTo($email)
+            //            ->setBody($this->renderView($view, $email_data), 'text/html');
+            //    $this->get('mailer')->send($message);
+            //}
         }
 
         return $this->redirect($this->generateUrl('decklist_detail', array(
