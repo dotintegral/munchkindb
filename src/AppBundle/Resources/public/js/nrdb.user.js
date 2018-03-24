@@ -49,25 +49,25 @@
         if(user.data && user.data.donation > 0) {
             // thank you!
         } else {
-            user.showAds();
+            //user.showAds();
         }
  
         $(document).trigger('user.app');
     };
 
     user.showAds = function () {
-        adsbygoogle = window.adsbygoogle || [];
+        //adsbygoogle = window.adsbygoogle || [];
 
-        $('div.ad').each(function (index, element) {
-            $(element).show();
-            adsbygoogle.push({});
-        });
+        //$('div.ad').each(function (index, element) {
+        //    $(element).show();
+        //    adsbygoogle.push({});
+        //});
 
-        if($('ins.adsbygoogle').filter(':visible').length === 0) {
-            $('div.ad').each(function (index, element) {
-                $(element).addClass('ad-blocked').html("No ad,<br>no <span class=\"icon icon-credit\"></span>.<br>Like NRDB?<br>Whitelist us<br>or <a href=\"" + Routing.generate('donators') + "\">donate</a>.");
-            });
-        }
+        //if($('ins.adsbygoogle').filter(':visible').length === 0) {
+        //    $('div.ad').each(function (index, element) {
+        //        $(element).addClass('ad-blocked').html("No ad,<br>no <span class=\"icon icon-credit\"></span>.<br>Like NRDB?<br>Whitelist us<br>or <a href=\"" + Routing.generate('donators') + "\">donate</a>.");
+        //    });
+        //}
     };
 
     user.promise = new Promise(function (resolve, reject) {
