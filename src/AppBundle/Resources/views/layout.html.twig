@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.3.0/introjs.css">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
     <link rel="stylesheet" href="{{ asset('/bundles/app/css/style.css') }}">
-    <link href="https://fonts.googleapis.com/css?family=Lato|Merriweather:700,700i" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Lato|Merriweather:700,700i" rel="stylesheet">
 
     <script src="{{ asset('/bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData","version": asset_version('')}) }}"></script>
@@ -139,8 +139,10 @@
         {% endblock %}
       </div>
     </nav>
-
+    {% include 'AppBundle:Default:hero.html.twig' %}
+    <div class="page-content">
 {% block body %}{% endblock %}
+    </div>
     <div id="push"></div>
   </div>
   <footer class="hidden-print">
@@ -148,24 +150,19 @@
 
 {% block footer %}
 <div class="row">
-    <div class="col-xs-12">
-
-    <ul class="list-inline">
-    <li><a href="javascript:localStorage.clear()">Clear data</a></li>
-    </ul>
-
+  <div class="col-xs-12">
     <p>
-    Based on code and design by <a href="//twitter.com/alsciende">@alsciende</a>. Modified by CallidusAsinus.
+      Based on code and design by <a href="//twitter.com/alsciende">@alsciende</a>. Modified by CallidusAsinus.
+      Please post bug reports and feature requests on <a href="https://github.com/CallidusAsinus/munchkindb">Github</a>
     </p>
-
     <p>
-    Please post bug reports and feature requests on <a href="https://github.com/CallidusAsinus/munchkindb">Github</a>
+      <a href="http://munchkinccg.game/">Munchkin Collectible Card Game</a> is a registered trademark of Steve Jackson Games
+      Incorporated. Game component images, art, and text are &copy; Steve Jackson Games. All rights reserved.
+      This material is used here in accordance with the SJ Games <a href="http://www.sjgames.com/general/online_policy.html">online policy</a>.
     </p>
-
-    <p style="color:#333">
-        <a href="http://munchkinccg.game/"><b><i>Munchkin Collectible Card Game</i></b></a> is a registered trademark of Steve Jackson Games Incorporated. Game component images, art, and text are &copy; Steve Jackson Games. All rights reserved. This material is used here in accordance with the SJ Games <a href="http://www.sjgames.com/general/online_policy.html">online policy</a>.</a>
+      <a href="javascript:localStorage.clear()">Clear data</a>
     </p>
-    </div>
+  </div>
 </div>
 {% endblock %}
 

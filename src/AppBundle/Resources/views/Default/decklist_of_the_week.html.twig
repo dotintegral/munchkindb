@@ -1,14 +1,31 @@
-{% if decklist %}
+{% if dotw %}
+
+<div class="dotw">
+	<div class="container">
+		<div class="dotw-details">
+			<div class="dotw-title">Decklist of the Week</div>
+			<div class="dotw-split"></div>
+			<div class="dotw-name">{{ dotw.name }}</div>
+			<div class="dotw-user">by {{ dotw.username }}</div>
+		</div>
+		<div class="dotw-card">
+			<img id="img_identity" src="#empty" />
+		</div>
+	</div>
+</div>
+
+<!--
 <div id="highlight" class="decklist">
 
 <h2 class="section">Decklist of the week </h2>
-<h3><a class="decklist-name" href="{{ path('decklist_detail', { 'decklist_id': decklist.id, 'decklist_name': decklist.prettyname|e('url') }) }}">{{ decklist.name }}</a></h3>
-	
+<h3><a class="decklist-name" href="{{ path('decklist_detail', { 'decklist_id': dotw.id, 'decklist_name': dotw.prettyname|e('url') }) }}">{{ dotw.name }}</a></h3>
+-->
 <!-- Identity and Stats -->
+<!--
 <div class="row">
 	<div class="col-sm-3">
 		<img id="img_identity" src="#empty" alt="Identity" class="img-responsive  hidden-xs">
-	</div><!-- /.col-sm-3 -->
+	</div>
 	<div class="col-sm-9">
         <h4 id="identity">Identity</h4>
     	<div id="influence" class="small"></div>
@@ -19,19 +36,22 @@
 		<div id="limited" class="small"></div>
 	</div>
 </div>
+-->
 <!-- Identity and Stats -->
-	
-<div id="deck-content" class="row"></div>
-    
-<h4>
+
+<!-- <div id="deck-content" class="row"></div> -->
+
+<!-- <h4>
     Description by the author:
     <span class="username">
-    <a href="{{ path('user_profile_view', {user_id:decklist.user_id,user_name:decklist.username|e('url')}) }}" class="{{ decklist.usercolor }}">{{ decklist.username }}</a>
-    {% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="NetrunnerDB Gracious Donator"></span>{% endif %}
-    <small title="User Reputation">{{ decklist.reputation }}</small>
+    <a href="{{ path('user_profile_view', {user_id:dotw.user_id,user_name:dotw.username|e('url')}) }}" class="{{ dotw.usercolor }}">{{ dotw.username }}</a>
+    {% if dotw.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="NetrunnerDB Gracious Donator"></span>{% endif %}
+    <small title="User Reputation">{{ dotw.reputation }}</small>
     </span>
 </h4>
-{{ decklist.description|raw }}
+{{ dotw.description|raw }}
 
-</div> <!-- #highlight -->
+</div>
+ -->
+ <!-- #highlight -->
 {% endif %}

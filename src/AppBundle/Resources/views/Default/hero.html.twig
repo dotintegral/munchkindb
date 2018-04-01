@@ -1,0 +1,11 @@
+{% if dotw is defined and dotw %}
+  <div class="hero big">
+    <div class="background"></div>
+    <div class="dim"></div>
+    {% include 'AppBundle:Default:decklist_of_the_week.html.twig' %}
+  </div>
+{% else %}
+  <div class="hero">
+    <div class="background"></div>
+  </div>
+{% endif %}

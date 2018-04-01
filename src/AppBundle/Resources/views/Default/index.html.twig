@@ -7,7 +7,7 @@
 <script type="text/javascript">
 
 var Identity = null,
-	Decklist = {{ decklist|json_encode|raw }},
+	Decklist = {{ dotw|json_encode|raw }},
 	SelectedDeck = Decklist,
         MWL = null,
 	DisplaySort = 'type',
@@ -31,13 +31,8 @@ var Identity = null,
 
 <div class="container" id="index_page">
     <div class="row">
-        <div class="col-md-8">
-            {% include 'AppBundle:Default:decklist_of_the_week.html.twig' %}
-        </div>
-        <div class="col-md-4">
 			{% include 'AppBundle:Default:recent_decklists.html.twig' %}
-	        {% include 'AppBundle:Default:google_adaptable_ad.html.twig' %}
-        </div>
+      {% include 'AppBundle:Default:google_adaptable_ad.html.twig' %}
     </div>
 </div> <!-- .container -->
 
