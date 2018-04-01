@@ -11,9 +11,10 @@ RewriteRule .? - [L]
 
 RewriteRule assets/(.+) /web/bundles/netrunnerdbcards/$1 [L]
 RewriteRule bundles/(.+) /web/bundles/$1 [L]
+RewriteRule img/(.+) /web/img/$1 [L]
 RewriteRule icon.png /web/icon.png [L]
 
-RewriteRule ^(.*)$ /web/app.php [QSA,L]
+RewriteRule ^(.*)$ /web/app_dev.php [QSA,L]
 
 ExpiresActive On
 ExpiresByType image/png "access plus 1 month"

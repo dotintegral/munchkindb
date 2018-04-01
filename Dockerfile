@@ -21,6 +21,7 @@ RUN cp /usr/src/php/php.ini-production /usr/local/etc/php/php.ini
 
 COPY . /var/www/html/
 COPY ./docker/files/parameters.yml /var/www/html/app/config/
+COPY ./docker/files/app_dev.php /var/www/html/web/
 
 RUN sh /install-composer.sh
 RUN php composer.phar install
