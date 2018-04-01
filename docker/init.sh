@@ -5,6 +5,7 @@ docker exec mdb-server php app/console doctrine:database:create
 docker exec mdb-server php app/console doctrine:schema:update --force
 
 echo "Importing cards data"
-git clone -b munchkin-conversion git@github.com:CallidusAsinus/munchkin-cards-json.git ../cards-json
-wait 5 #make sure that the data was synced
+docker exec mdb-server git clone https://github.com/CallidusAsinus/munchkin-cards-json.git ./cards-json
+echo "--- Using workaround for issue #10 --- Please remove it as soon as issue is resolved ---"
+docker exec mdb-server sed -i -- 's/"OA1"/null/g' ./cards-json/pack/s1c.json
 docker exec mdb-server php app/console nrdb:import:std ./cards-json
